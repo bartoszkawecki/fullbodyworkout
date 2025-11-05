@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
-import { getWorkout } from "@shared/workoutData";
+import { getWorkout, getBlockForWeek } from "@shared/workoutData";
 import { ExerciseCard } from "@/components/ExerciseCard";
 import { CompletionCelebration } from "@/components/CompletionCelebration";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ export default function Workout() {
   const week = parseInt(params?.week || "1");
   const day = parseInt(params?.day || "1");
   const workout = getWorkout(week, day);
+  const blockName = getBlockForWeek(week);
 
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -72,10 +73,10 @@ export default function Workout() {
             </Button>
             <div>
               <h1 className="text-xl font-bold" data-testid="text-workout-title">
-                Week {week}, Day {day}
+                Week {week} - {blockName}
               </h1>
               <p className="text-sm text-muted-foreground" data-testid="text-exercise-progress-header">
-                Exercise {currentExercise + 1} of {workout.exercises.length}
+                Day {day} • Exercise {currentExercise + 1} of {workout.exercises.length}
               </p>
             </div>
           </div>

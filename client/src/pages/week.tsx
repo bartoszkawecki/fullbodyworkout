@@ -1,5 +1,5 @@
 import { DayCard } from "@/components/DayCard";
-import { getDaysForWeek } from "@shared/workoutData";
+import { getDaysForWeek, getBlockForWeek } from "@shared/workoutData";
 import { useLocation, useRoute } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ export default function Week() {
   const [, setLocation] = useLocation();
   const week = parseInt(params?.week || "1");
   const days = getDaysForWeek(week);
+  const blockName = getBlockForWeek(week);
 
   return (
     <div className="min-h-screen bg-background">
@@ -22,9 +23,11 @@ export default function Week() {
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold" data-testid="text-week-title">
-            Week {week}
-          </h1>
+          <div>
+            <h1 className="text-2xl font-bold" data-testid="text-week-title">
+              Week {week} - {blockName}
+            </h1>
+          </div>
         </div>
       </div>
 

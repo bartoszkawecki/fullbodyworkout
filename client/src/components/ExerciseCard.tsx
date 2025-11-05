@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
-import { Exercise } from "@shared/schema";
+import { WorkoutExercise } from "@shared/workoutData";
 import { Dumbbell } from "lucide-react";
 
 interface ExerciseCardProps {
-  exercise: Exercise;
+  exercise: WorkoutExercise;
   exerciseNumber: number;
   totalExercises: number;
 }
@@ -40,13 +40,21 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: Exerc
               </span>
               <div className="flex-1 flex items-center gap-2 text-sm">
                 <span className="font-medium">{set.reps} reps</span>
-                <span className="text-muted-foreground">•</span>
-                <span className="text-muted-foreground">@ {set.rir} RIR</span>
-                <span className="text-muted-foreground">•</span>
-                <span className="text-muted-foreground">Rest {set.rest}</span>
+                {set.rir !== null && (
+                  <>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-muted-foreground">@ {set.rir} RIR</span>
+                  </>
+                )}
               </div>
             </div>
           ))}
+        </div>
+        
+        <div className="pt-2 border-t">
+          <p className="text-sm text-muted-foreground">
+            <span className="font-medium">Rest:</span> {exercise.rest} min
+          </p>
         </div>
       </div>
     </Card>

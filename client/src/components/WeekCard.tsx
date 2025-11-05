@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getCompletedDaysForWeek } from "@/lib/storage";
+import { getBlockForWeek } from "@shared/workoutData";
 
 interface WeekCardProps {
   week: number;
@@ -13,6 +14,7 @@ interface WeekCardProps {
 export function WeekCard({ week, totalDays, onClick }: WeekCardProps) {
   const [completedDays, setCompletedDays] = useState(getCompletedDaysForWeek(week));
   const isFullyCompleted = completedDays === totalDays;
+  const blockName = getBlockForWeek(week);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +36,7 @@ export function WeekCard({ week, totalDays, onClick }: WeekCardProps) {
       )}
       <div className="space-y-3">
         <h3 className="text-xl font-semibold" data-testid={`text-week-${week}-title`}>
-          Week {week}
+          Week {week} - {blockName}
         </h3>
         <div className="flex items-center gap-2">
           <Badge variant="secondary" data-testid={`badge-week-${week}-progress`}>
