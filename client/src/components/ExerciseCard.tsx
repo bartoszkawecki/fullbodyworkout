@@ -18,7 +18,7 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: Exerc
           </div>
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-lg font-semibold" data-testid={`text-exercise-${exerciseNumber}-name`}>
+              <h3 className="text-lg font-semibold text-primary" data-testid={`text-exercise-${exerciseNumber}-name`}>
                 {exercise.name}
               </h3>
               <span className="text-sm text-muted-foreground whitespace-nowrap" data-testid={`text-exercise-progress`}>

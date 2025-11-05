@@ -13,7 +13,7 @@ export default function Home() {
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <Dumbbell className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold" data-testid="text-home-title">
+            <h1 className="text-3xl font-bold text-primary" data-testid="text-home-title">
               Workout Tracker
             </h1>
           </div>
