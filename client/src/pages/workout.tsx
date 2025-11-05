@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRoute, useLocation } from "wouter";
 import { getWorkout, getBlockForWeek } from "@shared/workoutData";
 import { ExerciseCard } from "@/components/ExerciseCard";
@@ -18,6 +18,8 @@ export default function Workout() {
 
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   if (!workout) {
     return (
@@ -34,10 +36,50 @@ export default function Workout() {
     }
   };
 
+  const handlePrevious = () => {
+    if (currentExercise > 0) {
+      setCurrentExercise((prev) => prev - 1);
+      console.log(`Moving to exercise ${currentExercise}`);
+    }
+  };
+
   const handleComplete = () => {
     markDayCompleted(week, day);
     setIsCompleted(true);
     console.log(`Completed Week ${week}, Day ${day}`);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    // Get final touch position
+    if (e.changedTouches.length > 0) {
+      touchEndX.current = e.changedTouches[0].clientX;
+    }
+
+    const swipeThreshold = 50; // minimum distance for a swipe
+    const diff = touchStartX.current - touchEndX.current;
+
+    // Only navigate if actual swipe occurred (not just a tap)
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swiped left - go to next exercise
+        handleNext();
+      } else {
+        // Swiped right - go to previous exercise
+        handlePrevious();
+      }
+    }
+
+    // Reset
+    touchStartX.current = 0;
+    touchEndX.current = 0;
   };
 
   const handleReturnHome = () => {
@@ -90,11 +132,19 @@ export default function Workout() {
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
-        <ExerciseCard
-          exercise={workout.exercises[currentExercise]}
-          exerciseNumber={currentExercise + 1}
-          totalExercises={workout.exercises.length}
-        />
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="transition-all duration-300"
+          data-testid="exercise-swipe-container"
+        >
+          <ExerciseCard
+            exercise={workout.exercises[currentExercise]}
+            exerciseNumber={currentExercise + 1}
+            totalExercises={workout.exercises.length}
+          />
+        </div>
 
         <Button
           variant="outline"
@@ -107,7 +157,11 @@ export default function Workout() {
         </Button>
 
         {nextExercise && (
-          <Card className="p-4 border" data-testid="card-next-exercise">
+          <Card 
+            className="p-4 border hover-elevate active-elevate-2 cursor-pointer" 
+            data-testid="card-next-exercise"
+            onClick={handleNext}
+          >
             <div className="flex items-center gap-3">
               <ArrowRight className="h-5 w-5 text-muted-foreground" />
               <div>
@@ -135,7 +189,7 @@ export default function Workout() {
           ) : (
             <Button
               size="lg"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 bg-primary text-primary-foreground border border-primary-border rounded-md px-8 w-full min-h-14 pt-[0px] pb-[0px] mt-[10px] mb-[10px]"
+              className="w-full min-h-14"
               onClick={handleNext}
               data-testid="button-next-exercise"
             >
