@@ -1,4 +1,3 @@
-import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
@@ -20,17 +19,18 @@ export function CompletionCelebration({ week, day, onReturnHome }: CompletionCel
     <div className="min-h-screen flex items-center justify-center p-4 bg-background relative overflow-hidden">
       {showConfetti && (
         <>
-          <div className="confetti-piece animate-confetti-fall" style={{ left: "10%", animationDelay: "0s" }} />
-          <div className="confetti-piece animate-confetti-fall" style={{ left: "30%", animationDelay: "0.2s" }} />
-          <div className="confetti-piece animate-confetti-fall" style={{ left: "50%", animationDelay: "0.4s" }} />
-          <div className="confetti-piece animate-confetti-fall" style={{ left: "70%", animationDelay: "0.1s" }} />
-          <div className="confetti-piece animate-confetti-fall" style={{ left: "90%", animationDelay: "0.3s" }} />
+          <div className="bicep-emoji animate-bicep-fall" style={{ left: "10%", animationDelay: "0s" }}>💪</div>
+          <div className="bicep-emoji animate-bicep-fall" style={{ left: "25%", animationDelay: "0.3s" }}>💪</div>
+          <div className="bicep-emoji animate-bicep-fall" style={{ left: "40%", animationDelay: "0.1s" }}>💪</div>
+          <div className="bicep-emoji animate-bicep-fall" style={{ left: "55%", animationDelay: "0.4s" }}>💪</div>
+          <div className="bicep-emoji animate-bicep-fall" style={{ left: "70%", animationDelay: "0.2s" }}>💪</div>
+          <div className="bicep-emoji animate-bicep-fall" style={{ left: "85%", animationDelay: "0.5s" }}>💪</div>
         </>
       )}
 
       <div className="text-center space-y-6 max-w-md z-10">
         <div className="flex justify-center">
-          <CheckCircle2 className="h-24 w-24 text-primary animate-scale-in" />
+          <div className="text-9xl animate-scale-in">💪</div>
         </div>
         <div className="space-y-2">
           <h1 className="text-3xl font-bold" data-testid="text-completion-title">
@@ -51,7 +51,7 @@ export function CompletionCelebration({ week, day, onReturnHome }: CompletionCel
       </div>
 
       <style>{`
-        @keyframes confetti-fall {
+        @keyframes bicep-fall {
           0% {
             transform: translateY(-100vh) rotate(0deg);
             opacity: 1;
@@ -74,28 +74,19 @@ export function CompletionCelebration({ week, day, onReturnHome }: CompletionCel
           }
         }
 
-        .animate-confetti-fall {
-          animation: confetti-fall 3s linear forwards;
+        .animate-bicep-fall {
+          animation: bicep-fall 3s linear forwards;
         }
 
         .animate-scale-in {
           animation: scale-in 0.5s ease-out;
         }
 
-        .confetti-piece {
+        .bicep-emoji {
           position: absolute;
-          width: 10px;
-          height: 10px;
-          background: hsl(var(--primary));
-          top: -10px;
-        }
-
-        .confetti-piece:nth-child(2n) {
-          background: hsl(var(--chart-2));
-        }
-
-        .confetti-piece:nth-child(3n) {
-          background: hsl(var(--chart-4));
+          font-size: 2rem;
+          top: -50px;
+          user-select: none;
         }
       `}</style>
     </div>
