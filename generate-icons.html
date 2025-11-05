@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Icon Generator</title>
+</head>
+<body>
+    <h1>App Icon Generator</h1>
+    <p>Right-click each canvas below and "Save image as..." to download</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px;">
+        <div>
+            <h3>Favicon (32x32)</h3>
+            <canvas id="favicon32" width="32" height="32" style="border: 1px solid #ccc;"></canvas>
+        </div>
+        <div>
+            <h3>Favicon (64x64)</h3>
+            <canvas id="favicon64" width="64" height="64" style="border: 1px solid #ccc;"></canvas>
+        </div>
+        <div>
+            <h3>App Icon (192x192)</h3>
+            <canvas id="icon192" width="192" height="192" style="border: 1px solid #ccc;"></canvas>
+        </div>
+        <div>
+            <h3>App Icon (512x512)</h3>
+            <canvas id="icon512" width="512" height="512" style="border: 1px solid #ccc;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function drawIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // White background
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw bicep emoji
+            ctx.font = `${size * 0.7}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('💪', size / 2, size / 2);
+        }
+
+        // Generate all icons
+        drawIcon('favicon32', 32);
+        drawIcon('favicon64', 64);
+        drawIcon('icon192', 192);
+        drawIcon('icon512', 512);
+    </script>
+</body>
+</html>
