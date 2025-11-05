@@ -1,18 +1,28 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+export const setSchema = z.object({
+  reps: z.string(),
+  rir: z.string(),
+  rest: z.string(),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+export const exerciseSchema = z.object({
+  name: z.string(),
+  sets: z.array(setSchema),
 });
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export const workoutSchema = z.object({
+  week: z.number(),
+  day: z.number(),
+  exercises: z.array(exerciseSchema),
+});
+
+export type Set = z.infer<typeof setSchema>;
+export type Exercise = z.infer<typeof exerciseSchema>;
+export type Workout = z.infer<typeof workoutSchema>;
+
+export interface CompletionStatus {
+  [weekKey: string]: {
+    [dayKey: string]: boolean;
+  };
+}
