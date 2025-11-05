@@ -5,7 +5,7 @@ import { ExerciseCard } from "@/components/ExerciseCard";
 import { CompletionCelebration } from "@/components/CompletionCelebration";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Search } from "lucide-react";
 import { markDayCompleted } from "@/lib/storage";
 
 export default function Workout() {
@@ -41,6 +41,13 @@ export default function Workout() {
 
   const handleReturnHome = () => {
     setLocation("/");
+  };
+
+  const handleSearchExercise = () => {
+    const exerciseName = workout.exercises[currentExercise].name;
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(exerciseName)}`;
+    window.open(searchUrl, "_blank");
+    console.log(`Searching for: ${exerciseName}`);
   };
 
   if (isCompleted) {
@@ -101,6 +108,16 @@ export default function Workout() {
             </div>
           </Card>
         )}
+
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={handleSearchExercise}
+          data-testid="button-search-exercise"
+        >
+          <Search className="h-4 w-4 mr-2" />
+          Search
+        </Button>
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
