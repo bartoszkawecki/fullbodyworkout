@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { pgTable, serial, integer, text, numeric, unique } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
 
 export const setSchema = z.object({
   reps: z.string(),
@@ -26,3 +28,17 @@ export interface CompletionStatus {
     [dayKey: string]: boolean;
   };
 }
+
+export const exerciseWeights = pgTable("exercise_weights", {
+  id: serial("id").primaryKey(),
+  week: integer("week").notNull(),
+  day: integer("day").notNull(),
+  exerciseName: text("exercise_name").notNull(),
+  weight: numeric("weight", { precision: 5, scale: 2 }).notNull(),
+}, (table) => ({
+  uniqueExercisePerDay: unique("unique_exercise_per_day").on(table.week, table.day, table.exerciseName),
+}));
+
+export const insertExerciseWeightSchema = createInsertSchema(exerciseWeights).omit({ id: true });
+export type InsertExerciseWeight = z.infer<typeof insertExerciseWeightSchema>;
+export type ExerciseWeight = typeof exerciseWeights.$inferSelect;
