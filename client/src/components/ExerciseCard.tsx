@@ -45,6 +45,7 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
     },
     onSuccess: () => {
       setShowSuccess(true);
+      queryClient.invalidateQueries({ queryKey: ["/api/exercise-stats"] });
       setTimeout(() => {
         setShowSuccess(false);
         queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
