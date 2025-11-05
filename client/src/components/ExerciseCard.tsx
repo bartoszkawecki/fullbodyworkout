@@ -18,7 +18,7 @@ interface ExerciseCardProps {
 
 export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, day }: ExerciseCardProps) {
   const [weight, setWeight] = useState<string>("");
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saved">("idle");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const { data: existingWeight } = useQuery<ExerciseWeight | null>({
     queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`],
@@ -35,17 +35,20 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
       if (!weight || parseFloat(weight) <= 0) {
         throw new Error("Please enter a valid weight");
       }
+      const numericWeight = parseFloat(weight).toFixed(2);
       return apiRequest("POST", "/api/weights", {
         week,
         day,
         exerciseName: exercise.name,
-        weight: weight.toString(),
+        weight: numericWeight,
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
-      setSaveStatus("saved");
-      setTimeout(() => setSaveStatus("idle"), 2000);
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
+      }, 2000);
     },
   });
 
@@ -120,10 +123,10 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
             <Button
               className="bg-primary hover:bg-primary/90"
               onClick={handleSave}
-              disabled={saveMutation.isPending || !weight}
+              disabled={saveMutation.isPending || !weight || showSuccess}
               data-testid="button-save-weight"
             >
-              {saveStatus === "saved" ? "👌" : "Save"}
+              {saveMutation.isPending || showSuccess ? "👌" : "Save"}
             </Button>
           </div>
         </div>
