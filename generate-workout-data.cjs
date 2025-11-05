@@ -4,6 +4,17 @@ const jsonFile = process.argv[2] || 'attached_assets/full_10_week_program_fixed_
 
 const jsonData = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
 
+// Build a map of week number to block name
+const weekToBlock = {};
+if (jsonData.program && jsonData.program.blocks) {
+  jsonData.program.blocks.forEach(blockInfo => {
+    blockInfo.weeks.forEach(weekKey => {
+      const weekNum = parseInt(weekKey.replace('week', ''));
+      weekToBlock[weekNum] = blockInfo.block;
+    });
+  });
+}
+
 const workouts = [];
 
 for (let weekNum = 1; weekNum <= 10; weekNum++) {
@@ -14,6 +25,8 @@ for (let weekNum = 1; weekNum <= 10; weekNum++) {
     console.log(`Warning: No data for ${weekKey}`);
     continue;
   }
+
+  const blockName = weekToBlock[weekNum] || 'Unknown Block';
 
   for (let dayNum = 1; dayNum <= 5; dayNum++) {
     const dayKey = `day${dayNum}`;
@@ -40,6 +53,7 @@ for (let weekNum = 1; weekNum <= 10; weekNum++) {
     workouts.push({
       week: weekNum,
       day: dayNum,
+      block: blockName,
       exercises: exercises
     });
   }
@@ -58,6 +72,7 @@ export interface WorkoutExercise {
 export interface Workout {
   week: number;
   day: number;
+  block: string;
   exercises: WorkoutExercise[];
 }
 
@@ -77,6 +92,11 @@ export function getDaysForWeek(week: number): number[] {
     .filter(w => w.week === week)
     .map(w => w.day);
   return Array.from(new Set(days)).sort((a, b) => a - b);
+}
+
+export function getBlockForWeek(week: number): string | undefined {
+  const workout = workoutData.find(w => w.week === week);
+  return workout?.block;
 }
 `;
 

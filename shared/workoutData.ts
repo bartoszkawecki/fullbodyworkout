@@ -11,6 +11,7 @@ export interface WorkoutExercise {
 export interface Workout {
   week: number;
   day: number;
+  block: string;
   exercises: WorkoutExercise[];
 }
 
@@ -18,6 +19,7 @@ export const workoutData: Workout[] = [
   {
     "week": 1,
     "day": 1,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Leg Press",
@@ -144,6 +146,7 @@ export const workoutData: Workout[] = [
   {
     "week": 1,
     "day": 2,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Smith Machine Shoulder Press",
@@ -260,6 +263,7 @@ export const workoutData: Workout[] = [
   {
     "week": 1,
     "day": 3,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Seated Cable Row",
@@ -376,6 +380,7 @@ export const workoutData: Workout[] = [
   {
     "week": 1,
     "day": 4,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Incline DB Press",
@@ -492,6 +497,7 @@ export const workoutData: Workout[] = [
   {
     "week": 1,
     "day": 5,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Lat Pull-down",
@@ -630,6 +636,7 @@ export const workoutData: Workout[] = [
   {
     "week": 2,
     "day": 1,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Leg Press",
@@ -756,6 +763,7 @@ export const workoutData: Workout[] = [
   {
     "week": 2,
     "day": 2,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Smith Machine Shoulder Press",
@@ -872,6 +880,7 @@ export const workoutData: Workout[] = [
   {
     "week": 2,
     "day": 3,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Seated Cable Row",
@@ -988,6 +997,7 @@ export const workoutData: Workout[] = [
   {
     "week": 2,
     "day": 4,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Incline DB Press",
@@ -1104,6 +1114,7 @@ export const workoutData: Workout[] = [
   {
     "week": 2,
     "day": 5,
+    "block": "Block 1.1",
     "exercises": [
       {
         "name": "Lat Pull-down",
@@ -1242,6 +1253,7 @@ export const workoutData: Workout[] = [
   {
     "week": 3,
     "day": 1,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Smith Machine Squat",
@@ -1368,6 +1380,7 @@ export const workoutData: Workout[] = [
   {
     "week": 3,
     "day": 2,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -1476,6 +1489,7 @@ export const workoutData: Workout[] = [
   {
     "week": 3,
     "day": 3,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Chest Supported Row",
@@ -1580,6 +1594,7 @@ export const workoutData: Workout[] = [
   {
     "week": 3,
     "day": 4,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -1692,6 +1707,7 @@ export const workoutData: Workout[] = [
   {
     "week": 3,
     "day": 5,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Lat Pull-down (wide grip)",
@@ -1818,6 +1834,7 @@ export const workoutData: Workout[] = [
   {
     "week": 4,
     "day": 1,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Smith Machine Squat",
@@ -1944,6 +1961,7 @@ export const workoutData: Workout[] = [
   {
     "week": 4,
     "day": 2,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -2052,6 +2070,7 @@ export const workoutData: Workout[] = [
   {
     "week": 4,
     "day": 3,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Chest Supported Row",
@@ -2156,6 +2175,7 @@ export const workoutData: Workout[] = [
   {
     "week": 4,
     "day": 4,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -2268,6 +2288,7 @@ export const workoutData: Workout[] = [
   {
     "week": 4,
     "day": 5,
+    "block": "Block 1.2",
     "exercises": [
       {
         "name": "Lat Pull-down (wide grip)",
@@ -2394,6 +2415,7 @@ export const workoutData: Workout[] = [
   {
     "week": 5,
     "day": 1,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "Back Squat",
@@ -2520,6 +2542,7 @@ export const workoutData: Workout[] = [
   {
     "week": 5,
     "day": 2,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -2628,6 +2651,7 @@ export const workoutData: Workout[] = [
   {
     "week": 5,
     "day": 3,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -2740,6 +2764,7 @@ export const workoutData: Workout[] = [
   {
     "week": 5,
     "day": 4,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "T-bar Row",
@@ -2862,6 +2887,7 @@ export const workoutData: Workout[] = [
   {
     "week": 5,
     "day": 5,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "Lat Pull-down",
@@ -2970,6 +2996,7 @@ export const workoutData: Workout[] = [
   {
     "week": 6,
     "day": 1,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "Back Squat",
@@ -3096,6 +3123,7 @@ export const workoutData: Workout[] = [
   {
     "week": 6,
     "day": 2,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -3204,6 +3232,7 @@ export const workoutData: Workout[] = [
   {
     "week": 6,
     "day": 3,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -3316,6 +3345,7 @@ export const workoutData: Workout[] = [
   {
     "week": 6,
     "day": 4,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "T-bar Row",
@@ -3438,6 +3468,7 @@ export const workoutData: Workout[] = [
   {
     "week": 6,
     "day": 5,
+    "block": "Block 2.1",
     "exercises": [
       {
         "name": "Lat Pull-down",
@@ -3546,6 +3577,7 @@ export const workoutData: Workout[] = [
   {
     "week": 7,
     "day": 1,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "Back Squat",
@@ -3676,6 +3708,7 @@ export const workoutData: Workout[] = [
   {
     "week": 7,
     "day": 2,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -3788,6 +3821,7 @@ export const workoutData: Workout[] = [
   {
     "week": 7,
     "day": 3,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -3904,6 +3938,7 @@ export const workoutData: Workout[] = [
   {
     "week": 7,
     "day": 4,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "T-bar Row",
@@ -4030,6 +4065,7 @@ export const workoutData: Workout[] = [
   {
     "week": 7,
     "day": 5,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "Lat Pull-down (wide grip)",
@@ -4146,6 +4182,7 @@ export const workoutData: Workout[] = [
   {
     "week": 8,
     "day": 1,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "Back Squat",
@@ -4276,6 +4313,7 @@ export const workoutData: Workout[] = [
   {
     "week": 8,
     "day": 2,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -4388,6 +4426,7 @@ export const workoutData: Workout[] = [
   {
     "week": 8,
     "day": 3,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -4504,6 +4543,7 @@ export const workoutData: Workout[] = [
   {
     "week": 8,
     "day": 4,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "T-bar Row",
@@ -4630,6 +4670,7 @@ export const workoutData: Workout[] = [
   {
     "week": 8,
     "day": 5,
+    "block": "Block 2.2",
     "exercises": [
       {
         "name": "Lat Pull-down (wide grip)",
@@ -4746,6 +4787,7 @@ export const workoutData: Workout[] = [
   {
     "week": 9,
     "day": 1,
+    "block": "Block 3.1",
     "exercises": [
       {
         "name": "Back Squat",
@@ -4872,6 +4914,7 @@ export const workoutData: Workout[] = [
   {
     "week": 9,
     "day": 2,
+    "block": "Block 3.1",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -4984,6 +5027,7 @@ export const workoutData: Workout[] = [
   {
     "week": 9,
     "day": 3,
+    "block": "Block 3.1",
     "exercises": [
       {
         "name": "Lat Pull-down",
@@ -5096,6 +5140,7 @@ export const workoutData: Workout[] = [
   {
     "week": 9,
     "day": 4,
+    "block": "Block 3.1",
     "exercises": [
       {
         "name": "BB Bench Press",
@@ -5208,6 +5253,7 @@ export const workoutData: Workout[] = [
   {
     "week": 9,
     "day": 5,
+    "block": "Block 3.1",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -5334,6 +5380,7 @@ export const workoutData: Workout[] = [
   {
     "week": 10,
     "day": 1,
+    "block": "Block 3.2",
     "exercises": [
       {
         "name": "Back Squat",
@@ -5460,6 +5507,7 @@ export const workoutData: Workout[] = [
   {
     "week": 10,
     "day": 2,
+    "block": "Block 3.2",
     "exercises": [
       {
         "name": "Sumo Deadlift",
@@ -5572,6 +5620,7 @@ export const workoutData: Workout[] = [
   {
     "week": 10,
     "day": 3,
+    "block": "Block 3.2",
     "exercises": [
       {
         "name": "Lat Pull-down",
@@ -5684,6 +5733,7 @@ export const workoutData: Workout[] = [
   {
     "week": 10,
     "day": 4,
+    "block": "Block 3.2",
     "exercises": [
       {
         "name": "BB Bench Press",
@@ -5796,6 +5846,7 @@ export const workoutData: Workout[] = [
   {
     "week": 10,
     "day": 5,
+    "block": "Block 3.2",
     "exercises": [
       {
         "name": "BB Overhead Press",
@@ -5931,4 +5982,9 @@ export function getDaysForWeek(week: number): number[] {
     .filter(w => w.week === week)
     .map(w => w.day);
   return Array.from(new Set(days)).sort((a, b) => a - b);
+}
+
+export function getBlockForWeek(week: number): string | undefined {
+  const workout = workoutData.find(w => w.week === week);
+  return workout?.block;
 }
