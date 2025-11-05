@@ -101,8 +101,8 @@ export default function Workout() {
   const nextExercise = !isLastExercise ? workout.exercises[currentExercise + 1] : null;
 
   return (
-    <div className="min-h-screen bg-background pb-24">
-      <div className="sticky top-0 z-50 bg-background border-b">
+    <div className="h-screen overflow-hidden bg-background flex flex-col">
+      <div className="sticky top-0 z-50 bg-background border-b flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center gap-3 mb-3">
             <Button
@@ -131,7 +131,8 @@ export default function Workout() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+      <div className="flex-1">
+        <div className="max-w-2xl mx-auto px-4 py-6 pb-28 space-y-4">
         <div
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -173,9 +174,10 @@ export default function Workout() {
             </div>
           </Card>
         )}
+        </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
+      <div className="fixed bottom-[10px] left-0 right-0 bg-background border-t p-4 flex-shrink-0">
         <div className="max-w-2xl mx-auto">
           {isLastExercise ? (
             <Button
