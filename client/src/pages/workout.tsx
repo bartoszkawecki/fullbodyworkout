@@ -45,9 +45,9 @@ export default function Workout() {
 
   const handleSearchExercise = () => {
     const exerciseName = workout.exercises[currentExercise].name;
-    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(exerciseName)}`;
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(exerciseName)}&tbm=isch`;
     window.open(searchUrl, "_blank");
-    console.log(`Searching for: ${exerciseName}`);
+    console.log(`Searching images for: ${exerciseName}`);
   };
 
   if (isCompleted) {
@@ -95,6 +95,16 @@ export default function Workout() {
           totalExercises={workout.exercises.length}
         />
 
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={handleSearchExercise}
+          data-testid="button-search-exercise"
+        >
+          <Search className="h-4 w-4 mr-2" />
+          Search
+        </Button>
+
         {nextExercise && (
           <Card className="p-4 border" data-testid="card-next-exercise">
             <div className="flex items-center gap-3">
@@ -108,16 +118,6 @@ export default function Workout() {
             </div>
           </Card>
         )}
-
-        <Button
-          variant="outline"
-          className="w-full"
-          onClick={handleSearchExercise}
-          data-testid="button-search-exercise"
-        >
-          <Search className="h-4 w-4 mr-2" />
-          Search
-        </Button>
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
