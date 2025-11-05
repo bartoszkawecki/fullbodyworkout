@@ -205,14 +205,14 @@ export default function Workout() {
 
         {nextExercise && (
           <Card 
-            className="p-4 border hover-elevate active-elevate-2 cursor-pointer" 
+            className="p-4 border bg-primary text-primary-foreground hover-elevate active-elevate-2 cursor-pointer" 
             data-testid="card-next-exercise"
             onClick={handleNext}
           >
             <div className="flex items-center gap-3">
-              <ArrowRight className="h-5 w-5 text-muted-foreground" />
+              <ArrowRight className="h-5 w-5" />
               <div>
-                <p className="text-sm text-muted-foreground">Next exercise:</p>
+                <p className="text-sm opacity-90">Next exercise:</p>
                 <p className="font-semibold" data-testid="text-next-exercise-name">
                   {nextExercise.name}
                 </p>
@@ -223,9 +223,9 @@ export default function Workout() {
         </div>
       </div>
 
-      <div className="fixed bottom-[10px] left-0 right-0 bg-background border-t p-4 flex-shrink-0">
-        <div className="max-w-2xl mx-auto">
-          {isLastExercise ? (
+      {isLastExercise && (
+        <div className="fixed bottom-[10px] left-0 right-0 bg-background border-t p-4 flex-shrink-0">
+          <div className="max-w-2xl mx-auto">
             <Button
               size="lg"
               className="w-full min-h-14"
@@ -234,18 +234,9 @@ export default function Workout() {
             >
               Complete Workout
             </Button>
-          ) : (
-            <Button
-              size="lg"
-              className="w-full min-h-14"
-              onClick={handleNext}
-              data-testid="button-next-exercise"
-            >
-              Next Exercise
-            </Button>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
