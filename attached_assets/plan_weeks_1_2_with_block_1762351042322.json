@@ -1,0 +1,1197 @@
+{
+  "program": {
+    "block": "Block 1.1",
+    "weeks": [
+      "week1",
+      "week2"
+    ]
+  },
+  "week1": {
+    "day1": [
+      {
+        "exercise": "Leg Press",
+        "sets": [
+          {
+            "reps": 10,
+            "rir": 4
+          },
+          {
+            "reps": 10,
+            "rir": 3
+          },
+          {
+            "reps": 10,
+            "rir": 3
+          },
+          {
+            "reps": 10,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Smith Machine Bench Press",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Chest Supported Row",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "DB Lateral Raise",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": 4
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Decline Crunch (no weight)",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Smith Machine Calf Raise",
+        "sets": [
+          {
+            "reps": 20,
+            "rir": 4
+          },
+          {
+            "reps": 20,
+            "rir": 3
+          },
+          {
+            "reps": 20,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day2": [
+      {
+        "exercise": "Smith Machine Shoulder Press",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Lat Pull-down",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Leg Curl",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Pec Deck/Pec Flye Machine",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Cable Pushdown",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": 4
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day3": [
+      {
+        "exercise": "Seated Cable Row",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "Walking DB Lunges",
+        "sets": [
+          {
+            "reps": 30,
+            "rir": 4
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Cable Upright Row",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Lying Leg Raise",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "DB Bicep Curl",
+        "sets": [
+          {
+            "reps": 30,
+            "rir": 4
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day4": [
+      {
+        "exercise": "Incline DB Press",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Leg Extension",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "Hyperextension",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Smith Machine Calf Raise",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": 4
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Cable Lateral Raise",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day5": [
+      {
+        "exercise": "Lat Pull-down",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Alternate DB Shoulder Press",
+        "sets": [
+          {
+            "reps": 24,
+            "rir": 4
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "BB Hip Thrust",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "Standing Cable Chest Flye",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Cable Pushdown",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "DB Bicep Curl",
+        "sets": [
+          {
+            "reps": 24,
+            "rir": 4
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ]
+  },
+  "week2": {
+    "day1": [
+      {
+        "exercise": "Leg Press",
+        "sets": [
+          {
+            "reps": 10,
+            "rir": 4
+          },
+          {
+            "reps": 10,
+            "rir": 3
+          },
+          {
+            "reps": 10,
+            "rir": 3
+          },
+          {
+            "reps": 10,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Smith Machine Bench Press",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Chest Supported Row",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "DB Lateral Raise",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": 4
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Decline Crunch (no weight)",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Smith Machine Calf Raise",
+        "sets": [
+          {
+            "reps": 20,
+            "rir": 4
+          },
+          {
+            "reps": 20,
+            "rir": 3
+          },
+          {
+            "reps": 20,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day2": [
+      {
+        "exercise": "Smith Machine Shoulder Press",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Lat Pull-down",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Leg Curl",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Pec Deck/Pec Flye Machine",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Cable Pushdown",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": 4
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day3": [
+      {
+        "exercise": "Seated Cable Row",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "Walking DB Lunges",
+        "sets": [
+          {
+            "reps": 30,
+            "rir": 4
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Cable Upright Row",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Lying Leg Raise",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          },
+          {
+            "reps": 15,
+            "rir": null
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "DB Bicep Curl",
+        "sets": [
+          {
+            "reps": 30,
+            "rir": 4
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          },
+          {
+            "reps": 30,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day4": [
+      {
+        "exercise": "Incline DB Press",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Leg Extension",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "Hyperextension",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Smith Machine Calf Raise",
+        "sets": [
+          {
+            "reps": 15,
+            "rir": 4
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          },
+          {
+            "reps": 15,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Cable Lateral Raise",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ],
+    "day5": [
+      {
+        "exercise": "Lat Pull-down",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "Alternate DB Shoulder Press",
+        "sets": [
+          {
+            "reps": 24,
+            "rir": 4
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          }
+        ],
+        "rest": "2-3"
+      },
+      {
+        "exercise": "BB Hip Thrust",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1-2"
+      },
+      {
+        "exercise": "Standing Cable Chest Flye",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "Cable Pushdown",
+        "sets": [
+          {
+            "reps": 12,
+            "rir": 4
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          },
+          {
+            "reps": 12,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      },
+      {
+        "exercise": "DB Bicep Curl",
+        "sets": [
+          {
+            "reps": 24,
+            "rir": 4
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          },
+          {
+            "reps": 24,
+            "rir": 3
+          }
+        ],
+        "rest": "1"
+      }
+    ]
+  }
+}
