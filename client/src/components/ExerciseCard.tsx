@@ -1,4 +1,6 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { WorkoutExercise } from "@shared/workoutData";
 import { Dumbbell } from "lucide-react";
 
@@ -55,6 +57,28 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: Exerc
           <p className="text-sm text-muted-foreground">
             <span className="font-medium">Rest:</span> {exercise.rest} min
           </p>
+        </div>
+
+        <div className="pt-2 border-t">
+          <div className="flex gap-2 items-center">
+            <div className="flex-1 relative">
+              <Input
+                type="number"
+                placeholder="Add Weight"
+                className="pr-12"
+                data-testid="input-weight"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
+                kg
+              </span>
+            </div>
+            <Button
+              className="bg-primary hover:bg-primary/90"
+              data-testid="button-save-weight"
+            >
+              Save
+            </Button>
+          </div>
         </div>
       </div>
     </Card>
