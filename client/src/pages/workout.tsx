@@ -187,6 +187,8 @@ export default function Workout() {
                   exercise={exercise}
                   exerciseNumber={index + 1}
                   totalExercises={workout.exercises.length}
+                  week={week}
+                  day={day}
                 />
               </div>
             ))}

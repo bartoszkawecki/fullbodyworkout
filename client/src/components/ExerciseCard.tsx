@@ -1,16 +1,57 @@
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WorkoutExercise } from "@shared/workoutData";
 import { Dumbbell } from "lucide-react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import type { ExerciseWeight } from "@shared/schema";
 
 interface ExerciseCardProps {
   exercise: WorkoutExercise;
   exerciseNumber: number;
   totalExercises: number;
+  week: number;
+  day: number;
 }
 
-export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: ExerciseCardProps) {
+export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, day }: ExerciseCardProps) {
+  const [weight, setWeight] = useState<string>("");
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saved">("idle");
+
+  const { data: existingWeight } = useQuery<ExerciseWeight | null>({
+    queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`],
+  });
+
+  useEffect(() => {
+    if (existingWeight?.weight && weight === "") {
+      setWeight(existingWeight.weight);
+    }
+  }, [existingWeight, weight]);
+
+  const saveMutation = useMutation({
+    mutationFn: async () => {
+      if (!weight || parseFloat(weight) <= 0) {
+        throw new Error("Please enter a valid weight");
+      }
+      return apiRequest("POST", "/api/weights", {
+        week,
+        day,
+        exerciseName: exercise.name,
+        weight: weight.toString(),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus("idle"), 2000);
+    },
+  });
+
+  const handleSave = () => {
+    saveMutation.mutate();
+  };
   return (
     <Card className="border" data-testid={`card-exercise-${exerciseNumber}`}>
       <div className="p-6 space-y-4">
@@ -68,6 +109,8 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: Exerc
                 step="0.5"
                 placeholder="Add Weight"
                 className="pr-12"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
                 data-testid="input-weight"
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
@@ -76,9 +119,11 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: Exerc
             </div>
             <Button
               className="bg-primary hover:bg-primary/90"
+              onClick={handleSave}
+              disabled={saveMutation.isPending || !weight}
               data-testid="button-save-weight"
             >
-              Save
+              {saveStatus === "saved" ? "👌" : "Save"}
             </Button>
           </div>
         </div>
