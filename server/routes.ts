@@ -1,13 +1,44 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { insertExerciseWeightSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
+  app.post("/api/weights", async (req, res) => {
+    try {
+      const data = insertExerciseWeightSchema.parse(req.body);
+      const saved = await storage.saveExerciseWeight(data);
+      res.json(saved);
+    } catch (error) {
+      console.error("Error saving weight:", error);
+      res.status(400).json({ error: "Failed to save weight" });
+    }
+  });
 
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  app.get("/api/weights/:week/:day/:exerciseName", async (req, res) => {
+    try {
+      const week = parseInt(req.params.week);
+      const day = parseInt(req.params.day);
+      const exerciseName = decodeURIComponent(req.params.exerciseName);
+      
+      const weight = await storage.getExerciseWeight(week, day, exerciseName);
+      res.json(weight || null);
+    } catch (error) {
+      console.error("Error getting weight:", error);
+      res.status(500).json({ error: "Failed to get weight" });
+    }
+  });
+
+  app.get("/api/weights/history/:exerciseName", async (req, res) => {
+    try {
+      const exerciseName = decodeURIComponent(req.params.exerciseName);
+      const history = await storage.getExerciseWeightHistory(exerciseName);
+      res.json(history);
+    } catch (error) {
+      console.error("Error getting weight history:", error);
+      res.status(500).json({ error: "Failed to get weight history" });
+    }
+  });
 
   const httpServer = createServer(app);
 
