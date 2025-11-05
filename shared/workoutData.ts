@@ -1,4 +1,4 @@
-// Auto-generated from full_10_week_program_updated_wk1_wk2_1762362037625.json
+// Auto-generated from full_10_week_program_clean_1762366109040.json
 
 export interface Exercise {
   name: string;
@@ -76,7 +76,7 @@ export const workoutData: WeekData[] = [
             rest: '1'
           },
           {
-            name: 'Pec Deck/Pec Flye Machine',
+            name: 'Pec Deck',
             sets: [{ reps: 12, rir: 4 }, { reps: 12, rir: 3 }, { reps: 12, rir: 3 }],
             rest: '1'
           },
@@ -96,7 +96,7 @@ export const workoutData: WeekData[] = [
             rest: '1-2'
           },
           {
-            name: 'Walking DB lunges',
+            name: 'DB Walking Lunge',
             sets: [{ reps: 30, rir: 4 }, { reps: 30, rir: 3 }, { reps: 30, rir: 3 }],
             rest: '2-3'
           },
@@ -242,7 +242,7 @@ export const workoutData: WeekData[] = [
             rest: '1'
           },
           {
-            name: 'Pec Deck/Pec Flye Machine',
+            name: 'Pec Deck',
             sets: [{ reps: 12, rir: 4 }, { reps: 12, rir: 3 }, { reps: 12, rir: 3 }],
             rest: '1'
           },
@@ -262,7 +262,7 @@ export const workoutData: WeekData[] = [
             rest: '1-2'
           },
           {
-            name: 'Walking DB lunges',
+            name: 'DB Walking Lunge',
             sets: [{ reps: 30, rir: 4 }, { reps: 30, rir: 3 }, { reps: 30, rir: 3 }],
             rest: '2-3'
           },
@@ -433,7 +433,7 @@ export const workoutData: WeekData[] = [
             rest: '2-3'
           },
           {
-            name: 'EZ Bar Upright Row',
+            name: 'Cable Upright Row',
             sets: [{ reps: 12, rir: 3 }, { reps: 12, rir: 3 }, { reps: 12, rir: 2 }],
             rest: '1'
           },
@@ -599,7 +599,7 @@ export const workoutData: WeekData[] = [
             rest: '2-3'
           },
           {
-            name: 'EZ Bar Upright Row',
+            name: 'Cable Upright Row',
             sets: [{ reps: 12, rir: 3 }, { reps: 12, rir: 3 }, { reps: 12, rir: 2 }],
             rest: '1'
           },
@@ -1404,7 +1404,7 @@ export const workoutData: WeekData[] = [
             rest: '1-2'
           },
           {
-            name: 'DB Tricep Skullcrusher',
+            name: 'DB Skull Crusher',
             sets: [{ reps: 8, rir: 2 }, { reps: 8, rir: 2 }, { reps: 8, rir: 1 }],
             rest: '1'
           },
@@ -1540,7 +1540,7 @@ export const workoutData: WeekData[] = [
             rest: '1'
           },
           {
-            name: 'Decline Crunch (weighted)',
+            name: 'Decline Crunch (Weighted)',
             sets: [{ reps: 15, rir: 2 }, { reps: 15, rir: 2 }, { reps: 15, rir: 2 }, { reps: 15, rir: 1 }],
             rest: '1'
           },
@@ -1570,7 +1570,7 @@ export const workoutData: WeekData[] = [
             rest: '1-2'
           },
           {
-            name: 'DB Tricep Skull Crusher',
+            name: 'DB Skull Crusher',
             sets: [{ reps: 8, rir: 2 }, { reps: 8, rir: 1 }, { reps: 8, rir: 0 }],
             rest: '1'
           },
