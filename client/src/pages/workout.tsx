@@ -203,7 +203,7 @@ export default function Workout() {
           Search
         </Button>
 
-        {nextExercise && (
+        {nextExercise ? (
           <Card 
             className="p-4 border bg-primary text-primary-foreground hover-elevate active-elevate-2 cursor-pointer" 
             data-testid="card-next-exercise"
@@ -219,24 +219,22 @@ export default function Workout() {
               </div>
             </div>
           </Card>
+        ) : (
+          <Card 
+            className="p-4 border bg-primary text-primary-foreground hover-elevate active-elevate-2 cursor-pointer" 
+            data-testid="card-complete-workout"
+            onClick={handleComplete}
+          >
+            <div className="flex items-center gap-3">
+              <ArrowRight className="h-5 w-5" />
+              <div>
+                <p className="font-semibold">Complete Workout</p>
+              </div>
+            </div>
+          </Card>
         )}
         </div>
       </div>
-
-      {isLastExercise && (
-        <div className="fixed bottom-[10px] left-0 right-0 bg-background border-t p-4 flex-shrink-0">
-          <div className="max-w-2xl mx-auto">
-            <Button
-              size="lg"
-              className="w-full min-h-14"
-              onClick={handleComplete}
-              data-testid="button-complete-workout"
-            >
-              Complete Workout
-            </Button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
