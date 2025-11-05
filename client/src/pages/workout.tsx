@@ -135,7 +135,7 @@ export default function Workout() {
           ) : (
             <Button
               size="lg"
-              className="w-full min-h-14"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover-elevate active-elevate-2 bg-primary text-primary-foreground border border-primary-border rounded-md px-8 w-full min-h-14 pt-[0px] pb-[0px] mt-[10px] mb-[10px]"
               onClick={handleNext}
               data-testid="button-next-exercise"
             >
