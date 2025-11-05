@@ -40,6 +40,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/exercise-stats", async (req, res) => {
+    try {
+      const stats = await storage.getExerciseStats();
+      res.json(stats);
+    } catch (error) {
+      console.error("Error getting exercise stats:", error);
+      res.status(500).json({ error: "Failed to get exercise stats" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

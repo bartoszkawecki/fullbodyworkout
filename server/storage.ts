@@ -1,11 +1,18 @@
 import { type ExerciseWeight, type InsertExerciseWeight, exerciseWeights } from "@shared/schema";
 import { db } from "./db";
-import { eq, and } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
+
+export interface ExerciseStats {
+  exerciseName: string;
+  recordCount: number;
+  bestWeight: number | null;
+}
 
 export interface IStorage {
   saveExerciseWeight(data: InsertExerciseWeight): Promise<ExerciseWeight>;
   getExerciseWeight(week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined>;
   getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]>;
+  getExerciseStats(): Promise<ExerciseStats[]>;
 }
 
 export class DbStorage implements IStorage {
@@ -54,6 +61,24 @@ export class DbStorage implements IStorage {
       .from(exerciseWeights)
       .where(eq(exerciseWeights.exerciseName, exerciseName))
       .orderBy(exerciseWeights.week, exerciseWeights.day);
+  }
+
+  async getExerciseStats(): Promise<ExerciseStats[]> {
+    const results = await db
+      .select({
+        exerciseName: exerciseWeights.exerciseName,
+        recordCount: sql<number>`count(*)::int`,
+        bestWeight: sql<string>`max(${exerciseWeights.weight})`,
+      })
+      .from(exerciseWeights)
+      .groupBy(exerciseWeights.exerciseName)
+      .orderBy(exerciseWeights.exerciseName);
+
+    return results.map(r => ({
+      exerciseName: r.exerciseName,
+      recordCount: r.recordCount,
+      bestWeight: r.bestWeight ? parseFloat(r.bestWeight) : null,
+    }));
   }
 }
 

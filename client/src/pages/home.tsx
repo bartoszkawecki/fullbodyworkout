@@ -1,7 +1,8 @@
 import { WeekCard } from "@/components/WeekCard";
 import { getAvailableWeeks, getDaysForWeek } from "@shared/workoutData";
 import { useLocation } from "wouter";
-import { Dumbbell } from "lucide-react";
+import { Dumbbell, TrendingUp } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -21,6 +22,17 @@ export default function Home() {
             Full Body Beginner Program
           </p>
         </div>
+
+        <Card
+          className="p-6 hover-elevate active-elevate-2 cursor-pointer transition-all"
+          onClick={() => setLocation("/progress")}
+          data-testid="button-progress"
+        >
+          <div className="flex items-center gap-3">
+            <TrendingUp className="h-6 w-6 text-primary" />
+            <h2 className="text-2xl font-semibold">Progress</h2>
+          </div>
+        </Card>
 
         <div className="space-y-4">
           <h2 className="text-xl font-semibold">Select a Week</h2>
