@@ -1,0 +1,290 @@
+
+📌 Product Requirements Document (PRD)
+Product Name
+Full Body Beginner Workout Tracker
+Version
+MVP — v0.1
+Product Summary
+A mobile-first web app that helps users follow and track a 10-week full-body beginner workout program. The app shows exercises for each day, set & rep targets, and allows users to mark workouts as complete.
+
+🎯 Goals
+Help users know what exercise to do next.
+
+
+Allow users to mark workouts as completed.
+
+
+Provide a simple & fast UI for mobile (touch-friendly).
+
+
+Do not include timers, rep counters, video tutorials, or social features in MVP.
+
+
+
+👥 Target Users
+Fitness beginners using a structured full-body plan.
+
+
+Self-guided trainees who want a clear daily workout structure (mainly smartphone users).
+
+
+Users performing gym workouts, often mid-exercise and needing quick navigation.
+
+
+
+🧱 Workout Program Structure
+Level
+Weeks
+Label
+Block 1.1
+Week 1–2
+Beginner Phase A
+Block 1.2
+Week 3–4
+Beginner Phase B
+Block 2.1
+Week 5–6
+Progression Phase A
+Block 2.2
+Week 7–8
+Progression Phase B
+Block 3.1
+Week 9
+Advanced Intro
+Block 3.2
+Week 10
+Final Phase
+
+Each week → 5 workout days
+ Each day → 5–6 exercises
+ Each exercise → 3–4 sets
+ Each set → reps, RIR, rest time
+✅ App must handle this program structure
+ ✅ Support only the fixed program (no custom workouts in MVP)
+
+🧭 User Journey
+1) Home / Start Page
+Choose Week (1 to 10)
+
+
+Choose Day (1-5)
+
+
+Show completion status badges
+
+
+UI example
+ Week 1 ▢
+Day 1 ✅ Completed
+
+
+Day 2 ▢ Not Started
+
+
+Day 3 ▢
+
+
+Day 4 ▢
+
+
+Day 5 ▢
+
+
+2) Workout Viewer
+Shows:
+Exercise name
+
+
+Sets x reps x RIR
+
+
+Rest time suggestion (text only)
+
+
+"Next Exercise" button
+
+
+"Complete Workout" button at end
+
+
+Example screen for set display:
+Goblet Squat
+ Set 1: 10 reps @ 2 RIR — Rest 90s
+ Set 2: 10 reps @ 1-2 RIR
+ …
+Buttons:
+Next Exercise
+
+
+Finish Workout / Mark Complete
+
+
+3) Completion
+After last exercise:
+Confetti or ✅ animation (simple MVP)
+
+
+Option: “Return Home”
+
+
+
+✨ Success Indicators
+User knows exactly what to do each session
+
+
+Zero confusion mid-session
+
+
+Fast navigation, no loading-hell
+
+
+Minimal typing — mostly tapping
+
+
+
+📱 Design Requirements
+UI
+Mobile-first responsive layout
+
+
+Large tap targets & buttons
+
+
+Legible text for small screens
+
+
+Sticky nav for Next / Finish Workout
+
+
+UX
+No scrolling walls of text
+
+
+One exercise per screen OR clean stacked list (choose based on simplicity)
+
+
+Progress indicators (e.g., “Exercise 2/6”)
+
+
+Dark Mode (optional stretch)
+
+💾 Data Storage
+MVP
+Local browser storage (localStorage) for completion status
+
+
+No login, no cloud sync
+
+
+Data to store:
+Week completions (Boolean)
+
+
+Day completions (Boolean)
+
+
+Example data object:
+{
+ "week1": { "day1": true, "day2": false, ... },
+ "week2": { ... }
+}
+
+
+🚫 Out-of-Scope for MVP
+Rep counting
+
+
+Rest timers
+
+
+Weight logging
+
+
+Progress charts
+
+
+User accounts / cloud database
+
+
+Notifications
+
+
+Custom workouts
+
+
+(We want a clean MVP first)
+
+⚙️ Technical Requirements
+Stack
+Frontend only (HTML/CSS/JS)
+
+
+No backend required in MVP
+
+
+Host on Replit
+
+
+Responsive mobile-first CSS (Tailwind optional but recommended)
+
+
+JSON file for workout program data
+
+
+
+📂 Suggested File Structure
+/src
+  index.html
+  style.css (or Tailwind)
+  app.js
+  data.js (plan JSON)
+
+
+
+
+Workout Program Scope (MVP)
+MVP includes only:
+Week
+Block
+Days
+Source
+Week 1
+Block 1.1
+5 days
+Uploaded file
+Week 2
+Block 1.1
+5 days
+Uploaded file
+
+Total MVP Workouts:
+ 10 sessions (5 days × 2 weeks)
+Future Expansion (Not in MVP)
+Weeks 3–10 (Block 1.2 → Block 3.2)
+ Will be included in post-MVP release once UX is validated.
+
+🧱 Data Source & Structure
+Each Excel file = one week
+
+
+Each sheet = one workout day (Day 1–5)
+
+
+Each day includes:
+
+
+5–6 exercises
+
+
+3–4 sets per exercise
+
+
+Reps + RIR per set
+
+
+Rest time per exercise
+
+
+Data Implementation for MVP
+Convert Excel → JSON manually once during build.
+No spreadsheet upload feature in MVP.
