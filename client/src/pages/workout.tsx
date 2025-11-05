@@ -18,6 +18,8 @@ export default function Workout() {
 
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
@@ -31,14 +33,20 @@ export default function Workout() {
 
   const handleNext = () => {
     if (currentExercise < workout.exercises.length - 1) {
+      setIsTransitioning(true);
       setCurrentExercise((prev) => prev + 1);
+      setSwipeOffset(0);
+      setTimeout(() => setIsTransitioning(false), 300);
       console.log(`Moving to exercise ${currentExercise + 2}`);
     }
   };
 
   const handlePrevious = () => {
     if (currentExercise > 0) {
+      setIsTransitioning(true);
       setCurrentExercise((prev) => prev - 1);
+      setSwipeOffset(0);
+      setTimeout(() => setIsTransitioning(false), 300);
       console.log(`Moving to exercise ${currentExercise}`);
     }
   };
@@ -51,10 +59,27 @@ export default function Workout() {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
+    if (!touchStartX.current) return;
+    
+    const currentX = e.touches[0].clientX;
+    touchEndX.current = currentX;
+    const diff = currentX - touchStartX.current;
+    
+    // Limit swipe range
+    const maxSwipe = 300;
+    const constrainedDiff = Math.max(-maxSwipe, Math.min(maxSwipe, diff));
+    
+    // Don't allow swiping beyond boundaries
+    if ((currentExercise === 0 && diff > 0) || 
+        (currentExercise === workout.exercises.length - 1 && diff < 0)) {
+      setSwipeOffset(constrainedDiff * 0.2); // Reduced resistance at boundaries
+    } else {
+      setSwipeOffset(constrainedDiff);
+    }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -68,13 +93,19 @@ export default function Workout() {
 
     // Only navigate if actual swipe occurred (not just a tap)
     if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
+      if (diff > 0 && currentExercise < workout.exercises.length - 1) {
         // Swiped left - go to next exercise
         handleNext();
-      } else {
+      } else if (diff < 0 && currentExercise > 0) {
         // Swiped right - go to previous exercise
         handlePrevious();
+      } else {
+        // At boundary - snap back
+        setSwipeOffset(0);
       }
+    } else {
+      // Snap back if not enough swipe
+      setSwipeOffset(0);
     }
 
     // Reset
@@ -131,20 +162,35 @@ export default function Workout() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-hidden">
         <div className="max-w-2xl mx-auto px-4 py-6 pb-28 space-y-4">
         <div
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          className="transition-all duration-300"
+          className="relative overflow-hidden"
           data-testid="exercise-swipe-container"
         >
-          <ExerciseCard
-            exercise={workout.exercises[currentExercise]}
-            exerciseNumber={currentExercise + 1}
-            totalExercises={workout.exercises.length}
-          />
+          <div
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="flex"
+            style={{
+              transform: `translateX(calc(-${currentExercise * 100}% + ${swipeOffset}px))`,
+              transition: isTransitioning || swipeOffset === 0 ? 'transform 300ms ease-out' : 'none',
+            }}
+          >
+            {workout.exercises.map((exercise, index) => (
+              <div
+                key={index}
+                className="w-full flex-shrink-0 px-1"
+              >
+                <ExerciseCard
+                  exercise={exercise}
+                  exerciseNumber={index + 1}
+                  totalExercises={workout.exercises.length}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <Button
