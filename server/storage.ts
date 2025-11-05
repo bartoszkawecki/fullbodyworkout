@@ -1,38 +1,60 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { type ExerciseWeight, type InsertExerciseWeight, exerciseWeights } from "@shared/schema";
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  saveExerciseWeight(data: InsertExerciseWeight): Promise<ExerciseWeight>;
+  getExerciseWeight(week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined>;
+  getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DbStorage implements IStorage {
+  async saveExerciseWeight(data: InsertExerciseWeight): Promise<ExerciseWeight> {
+    const existing = await this.getExerciseWeight(data.week, data.day, data.exerciseName);
+    
+    if (existing) {
+      const [updated] = await db
+        .update(exerciseWeights)
+        .set({ weight: data.weight })
+        .where(
+          and(
+            eq(exerciseWeights.week, data.week),
+            eq(exerciseWeights.day, data.day),
+            eq(exerciseWeights.exerciseName, data.exerciseName)
+          )
+        )
+        .returning();
+      return updated;
+    } else {
+      const [created] = await db
+        .insert(exerciseWeights)
+        .values(data)
+        .returning();
+      return created;
+    }
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getExerciseWeight(week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined> {
+    const [weight] = await db
+      .select()
+      .from(exerciseWeights)
+      .where(
+        and(
+          eq(exerciseWeights.week, week),
+          eq(exerciseWeights.day, day),
+          eq(exerciseWeights.exerciseName, exerciseName)
+        )
+      );
+    return weight;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]> {
+    return db
+      .select()
+      .from(exerciseWeights)
+      .where(eq(exerciseWeights.exerciseName, exerciseName))
+      .orderBy(exerciseWeights.week, exerciseWeights.day);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DbStorage();
