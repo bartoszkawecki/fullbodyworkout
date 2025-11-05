@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { getCompletedDaysForWeek } from "@/lib/storage";
 
 interface WeekCardProps {
@@ -10,8 +11,15 @@ interface WeekCardProps {
 }
 
 export function WeekCard({ week, totalDays, onClick }: WeekCardProps) {
-  const completedDays = getCompletedDaysForWeek(week);
+  const [completedDays, setCompletedDays] = useState(getCompletedDaysForWeek(week));
   const isFullyCompleted = completedDays === totalDays;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCompletedDays(getCompletedDaysForWeek(week));
+    }, 500);
+    return () => clearInterval(interval);
+  }, [week]);
 
   return (
     <Card

@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { CheckCircle2, Circle } from "lucide-react";
-import { isDayCompleted } from "@/lib/storage";
+import { useState } from "react";
+import { isDayCompleted, toggleDayCompletion } from "@/lib/storage";
 
 interface DayCardProps {
   week: number;
@@ -9,7 +10,14 @@ interface DayCardProps {
 }
 
 export function DayCard({ week, day, onClick }: DayCardProps) {
-  const completed = isDayCompleted(week, day);
+  const [completed, setCompleted] = useState(isDayCompleted(week, day));
+
+  const handleToggleCompletion = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleDayCompletion(week, day);
+    setCompleted(!completed);
+    console.log(`Toggled completion for Week ${week}, Day ${day}`);
+  };
 
   return (
     <Card
@@ -26,13 +34,17 @@ export function DayCard({ week, day, onClick }: DayCardProps) {
             <p className="text-sm text-muted-foreground">Completed</p>
           )}
         </div>
-        <div data-testid={`status-day-${day}`}>
+        <button
+          onClick={handleToggleCompletion}
+          className="hover-elevate active-elevate-2 rounded-full p-1 -m-1"
+          data-testid={`button-toggle-day-${day}`}
+        >
           {completed ? (
-            <CheckCircle2 className="h-8 w-8 text-primary" />
+            <CheckCircle2 className="h-8 w-8 text-primary" data-testid={`status-day-${day}`} />
           ) : (
-            <Circle className="h-8 w-8 text-muted-foreground" />
+            <Circle className="h-8 w-8 text-muted-foreground" data-testid={`status-day-${day}`} />
           )}
-        </div>
+        </button>
       </div>
     </Card>
   );

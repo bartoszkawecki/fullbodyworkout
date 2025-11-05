@@ -30,6 +30,15 @@ export function markDayCompleted(week: number, day: number): void {
   setCompletionStatus(status);
 }
 
+export function toggleDayCompletion(week: number, day: number): void {
+  const status = getCompletionStatus();
+  if (!status[`week${week}`]) {
+    status[`week${week}`] = {};
+  }
+  status[`week${week}`][`day${day}`] = !status[`week${week}`][`day${day}`];
+  setCompletionStatus(status);
+}
+
 export function getCompletedDaysForWeek(week: number): number {
   const status = getCompletionStatus();
   const weekData = status[`week${week}`];
