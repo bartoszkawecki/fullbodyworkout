@@ -101,7 +101,7 @@ export default function Workout() {
   const nextExercise = !isLastExercise ? workout.exercises[currentExercise + 1] : null;
 
   return (
-    <div className="h-screen overflow-hidden bg-background flex flex-col">
+    <div className="fixed inset-0 overflow-hidden bg-background flex flex-col">
       <div className="sticky top-0 z-50 bg-background border-b flex-shrink-0">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center gap-3 mb-3">
@@ -131,7 +131,7 @@ export default function Workout() {
         </div>
       </div>
 
-      <div className="flex-1">
+      <div className="flex-1 overflow-y-auto">
         <div className="max-w-2xl mx-auto px-4 py-6 pb-28 space-y-4">
         <div
           onTouchStart={handleTouchStart}

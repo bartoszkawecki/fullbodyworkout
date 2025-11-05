@@ -325,4 +325,10 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  /* Prevent vertical scrolling but allow horizontal swipes */
+  .touch-pan-x {
+    touch-action: pan-x;
+    overscroll-behavior: none;
+  }
 }
