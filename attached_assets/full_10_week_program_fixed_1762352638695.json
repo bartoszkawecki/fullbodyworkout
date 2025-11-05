@@ -1,26 +1,52 @@
-// Auto-generated workout data from JSON
-export interface WorkoutExercise {
-  name: string;
-  sets: {
-    reps: number;
-    rir: number | null;
-  }[];
-  rest: string;
-}
-
-export interface Workout {
-  week: number;
-  day: number;
-  exercises: WorkoutExercise[];
-}
-
-export const workoutData: Workout[] = [
-  {
-    "week": 1,
-    "day": 1,
-    "exercises": [
+{
+  "program": {
+    "blocks": [
       {
-        "name": "Leg Press",
+        "block": "Block 1.1",
+        "weeks": [
+          "week1",
+          "week2"
+        ]
+      },
+      {
+        "block": "Block 1.2",
+        "weeks": [
+          "week3",
+          "week4"
+        ]
+      },
+      {
+        "block": "Block 2.1",
+        "weeks": [
+          "week5",
+          "week6"
+        ]
+      },
+      {
+        "block": "Block 2.2",
+        "weeks": [
+          "week7",
+          "week8"
+        ]
+      },
+      {
+        "block": "Block 3.1",
+        "weeks": [
+          "week9"
+        ]
+      },
+      {
+        "block": "Block 3.2",
+        "weeks": [
+          "week10"
+        ]
+      }
+    ]
+  },
+  "week1": {
+    "day1": [
+      {
+        "exercise": "Leg Press",
         "sets": [
           {
             "reps": 10,
@@ -42,7 +68,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Smith Machine Bench Press",
+        "exercise": "Smith Machine Bench Press",
         "sets": [
           {
             "reps": 12,
@@ -64,7 +90,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 12,
@@ -82,7 +108,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 15,
@@ -100,7 +126,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Decline Crunch (no weight)",
+        "exercise": "Decline Crunch (no weight)",
         "sets": [
           {
             "reps": 15,
@@ -122,7 +148,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 20,
@@ -139,14 +165,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 1,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "Smith Machine Shoulder Press",
+        "exercise": "Smith Machine Shoulder Press",
         "sets": [
           {
             "reps": 12,
@@ -168,7 +190,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -190,7 +212,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -212,7 +234,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Pec Deck/Pec Flye Machine",
+        "exercise": "Pec Deck/Pec Flye Machine",
         "sets": [
           {
             "reps": 12,
@@ -234,7 +256,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 15,
@@ -255,14 +277,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 1,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Seated Cable Row",
+        "exercise": "Seated Cable Row",
         "sets": [
           {
             "reps": 12,
@@ -284,7 +302,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Walking DB Lunges",
+        "exercise": "Walking DB Lunges",
         "sets": [
           {
             "reps": 30,
@@ -306,7 +324,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Cable Upright Row",
+        "exercise": "Cable Upright Row",
         "sets": [
           {
             "reps": 12,
@@ -328,7 +346,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Lying Leg Raise",
+        "exercise": "Lying Leg Raise",
         "sets": [
           {
             "reps": 15,
@@ -350,7 +368,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 30,
@@ -371,14 +389,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 1,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 12,
@@ -400,7 +414,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 12,
@@ -422,7 +436,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Hyperextension",
+        "exercise": "Hyperextension",
         "sets": [
           {
             "reps": 12,
@@ -444,7 +458,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -466,7 +480,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -487,14 +501,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 1,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -516,7 +526,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 24,
@@ -538,7 +548,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Hip Thrust",
+        "exercise": "BB Hip Thrust",
         "sets": [
           {
             "reps": 12,
@@ -560,7 +570,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -582,7 +592,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 12,
@@ -604,7 +614,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 24,
@@ -627,12 +637,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 2,
-    "day": 1,
-    "exercises": [
+  "week2": {
+    "day1": [
       {
-        "name": "Leg Press",
+        "exercise": "Leg Press",
         "sets": [
           {
             "reps": 10,
@@ -654,7 +662,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Smith Machine Bench Press",
+        "exercise": "Smith Machine Bench Press",
         "sets": [
           {
             "reps": 12,
@@ -676,7 +684,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 12,
@@ -694,7 +702,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 15,
@@ -712,7 +720,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Decline Crunch (no weight)",
+        "exercise": "Decline Crunch (no weight)",
         "sets": [
           {
             "reps": 15,
@@ -734,7 +742,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 20,
@@ -751,14 +759,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 2,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "Smith Machine Shoulder Press",
+        "exercise": "Smith Machine Shoulder Press",
         "sets": [
           {
             "reps": 12,
@@ -780,7 +784,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -802,7 +806,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -824,7 +828,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Pec Deck/Pec Flye Machine",
+        "exercise": "Pec Deck/Pec Flye Machine",
         "sets": [
           {
             "reps": 12,
@@ -846,7 +850,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 15,
@@ -867,14 +871,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 2,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Seated Cable Row",
+        "exercise": "Seated Cable Row",
         "sets": [
           {
             "reps": 12,
@@ -896,7 +896,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Walking DB Lunges",
+        "exercise": "Walking DB Lunges",
         "sets": [
           {
             "reps": 30,
@@ -918,7 +918,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Cable Upright Row",
+        "exercise": "Cable Upright Row",
         "sets": [
           {
             "reps": 12,
@@ -940,7 +940,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Lying Leg Raise",
+        "exercise": "Lying Leg Raise",
         "sets": [
           {
             "reps": 15,
@@ -962,7 +962,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 30,
@@ -983,14 +983,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 2,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 12,
@@ -1012,7 +1008,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 12,
@@ -1034,7 +1030,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Hyperextension",
+        "exercise": "Hyperextension",
         "sets": [
           {
             "reps": 12,
@@ -1056,7 +1052,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -1078,7 +1074,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -1099,14 +1095,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 2,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -1128,7 +1120,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 24,
@@ -1150,7 +1142,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Hip Thrust",
+        "exercise": "BB Hip Thrust",
         "sets": [
           {
             "reps": 12,
@@ -1172,7 +1164,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -1194,7 +1186,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 12,
@@ -1216,7 +1208,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 24,
@@ -1239,12 +1231,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 3,
-    "day": 1,
-    "exercises": [
+  "week3": {
+    "day1": [
       {
-        "name": "Smith Machine Squat",
+        "exercise": "Smith Machine Squat",
         "sets": [
           {
             "reps": 10,
@@ -1266,7 +1256,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 12,
@@ -1288,7 +1278,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Seated Cable Row",
+        "exercise": "Seated Cable Row",
         "sets": [
           {
             "reps": 12,
@@ -1306,7 +1296,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -1324,7 +1314,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Decline Crunch (no weight)",
+        "exercise": "Decline Crunch (no weight)",
         "sets": [
           {
             "reps": 15,
@@ -1346,7 +1336,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -1363,14 +1353,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 3,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 12,
@@ -1392,7 +1378,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down (close grip)",
+        "exercise": "Lat Pull-down (close grip)",
         "sets": [
           {
             "reps": 12,
@@ -1414,7 +1400,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -1436,7 +1422,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Pec Deck",
+        "exercise": "Pec Deck",
         "sets": [
           {
             "reps": 12,
@@ -1454,7 +1440,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 15,
@@ -1471,14 +1457,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 3,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 12,
@@ -1500,7 +1482,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Walking DB Lunges",
+        "exercise": "Walking DB Lunges",
         "sets": [
           {
             "reps": 30,
@@ -1518,7 +1500,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "EZ Bar Upright Row",
+        "exercise": "EZ Bar Upright Row",
         "sets": [
           {
             "reps": 12,
@@ -1536,7 +1518,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Lying Leg Raise",
+        "exercise": "Lying Leg Raise",
         "sets": [
           {
             "reps": 15,
@@ -1558,7 +1540,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 30,
@@ -1575,14 +1557,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 3,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 8,
@@ -1604,7 +1582,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 12,
@@ -1626,7 +1604,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 12,
@@ -1648,7 +1626,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -1670,7 +1648,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -1687,14 +1665,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 3,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down (wide grip)",
+        "exercise": "Lat Pull-down (wide grip)",
         "sets": [
           {
             "reps": 12,
@@ -1716,7 +1690,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 20,
@@ -1738,7 +1712,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Hip Thrust",
+        "exercise": "BB Hip Thrust",
         "sets": [
           {
             "reps": 12,
@@ -1760,7 +1734,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -1778,7 +1752,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 12,
@@ -1796,7 +1770,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 24,
@@ -1815,12 +1789,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 4,
-    "day": 1,
-    "exercises": [
+  "week4": {
+    "day1": [
       {
-        "name": "Smith Machine Squat",
+        "exercise": "Smith Machine Squat",
         "sets": [
           {
             "reps": 10,
@@ -1842,7 +1814,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 12,
@@ -1864,7 +1836,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Seated Cable Row",
+        "exercise": "Seated Cable Row",
         "sets": [
           {
             "reps": 12,
@@ -1882,7 +1854,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -1900,7 +1872,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Decline Crunch (no weight)",
+        "exercise": "Decline Crunch (no weight)",
         "sets": [
           {
             "reps": 15,
@@ -1922,7 +1894,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -1939,14 +1911,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 4,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 12,
@@ -1968,7 +1936,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down (close grip)",
+        "exercise": "Lat Pull-down (close grip)",
         "sets": [
           {
             "reps": 12,
@@ -1990,7 +1958,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -2012,7 +1980,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Pec Deck",
+        "exercise": "Pec Deck",
         "sets": [
           {
             "reps": 12,
@@ -2030,7 +1998,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 15,
@@ -2047,14 +2015,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 4,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 12,
@@ -2076,7 +2040,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Walking DB Lunges",
+        "exercise": "Walking DB Lunges",
         "sets": [
           {
             "reps": 30,
@@ -2094,7 +2058,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "EZ Bar Upright Row",
+        "exercise": "EZ Bar Upright Row",
         "sets": [
           {
             "reps": 12,
@@ -2112,7 +2076,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Lying Leg Raise",
+        "exercise": "Lying Leg Raise",
         "sets": [
           {
             "reps": 15,
@@ -2134,7 +2098,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 30,
@@ -2151,14 +2115,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 4,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 8,
@@ -2180,7 +2140,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 12,
@@ -2202,7 +2162,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 12,
@@ -2224,7 +2184,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -2246,7 +2206,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -2263,14 +2223,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 4,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down (wide grip)",
+        "exercise": "Lat Pull-down (wide grip)",
         "sets": [
           {
             "reps": 12,
@@ -2292,7 +2248,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 20,
@@ -2314,7 +2270,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Hip Thrust",
+        "exercise": "BB Hip Thrust",
         "sets": [
           {
             "reps": 12,
@@ -2336,7 +2292,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -2354,7 +2310,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 12,
@@ -2372,7 +2328,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 24,
@@ -2391,12 +2347,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 5,
-    "day": 1,
-    "exercises": [
+  "week5": {
+    "day1": [
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 10,
@@ -2418,7 +2372,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 10,
@@ -2440,7 +2394,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Chest supported Row",
+        "exercise": "Chest supported Row",
         "sets": [
           {
             "reps": 10,
@@ -2458,7 +2412,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -2476,7 +2430,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Kneeling Cable Crunch",
+        "exercise": "Kneeling Cable Crunch",
         "sets": [
           {
             "reps": 15,
@@ -2498,7 +2452,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Single Leg DB Calf Raise",
+        "exercise": "Single Leg DB Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -2515,14 +2469,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 5,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 10,
@@ -2544,7 +2494,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -2566,7 +2516,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 10,
@@ -2588,7 +2538,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -2606,7 +2556,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 12,
@@ -2623,14 +2573,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 5,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 8,
@@ -2652,7 +2598,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 10,
@@ -2674,7 +2620,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -2696,7 +2642,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "sets": [
           {
             "reps": 12,
@@ -2718,7 +2664,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -2735,14 +2681,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 5,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "T-bar Row",
+        "exercise": "T-bar Row",
         "sets": [
           {
             "reps": 10,
@@ -2764,7 +2706,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Bulgarian Split Squat",
+        "exercise": "Bulgarian Split Squat",
         "sets": [
           {
             "reps": 12,
@@ -2782,7 +2724,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Incline Cable Chest Flye",
+        "exercise": "Incline Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -2800,7 +2742,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Overhead Extension",
+        "exercise": "Cable Overhead Extension",
         "sets": [
           {
             "reps": 12,
@@ -2822,7 +2764,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Crunch",
+        "exercise": "Reverse Crunch",
         "sets": [
           {
             "reps": 15,
@@ -2840,7 +2782,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Seated Calf Press",
+        "exercise": "Seated Calf Press",
         "sets": [
           {
             "reps": 15,
@@ -2857,14 +2799,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 5,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -2886,7 +2824,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 20,
@@ -2908,7 +2846,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Romanian Deadlift",
+        "exercise": "Romanian Deadlift",
         "sets": [
           {
             "reps": 12,
@@ -2930,7 +2868,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 24,
@@ -2948,7 +2886,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Pec Deck",
+        "exercise": "Reverse Pec Deck",
         "sets": [
           {
             "reps": 12,
@@ -2967,12 +2905,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 6,
-    "day": 1,
-    "exercises": [
+  "week6": {
+    "day1": [
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 10,
@@ -2994,7 +2930,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 10,
@@ -3016,7 +2952,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Chest supported Row",
+        "exercise": "Chest supported Row",
         "sets": [
           {
             "reps": 10,
@@ -3034,7 +2970,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -3052,7 +2988,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Kneeling Cable Crunch",
+        "exercise": "Kneeling Cable Crunch",
         "sets": [
           {
             "reps": 15,
@@ -3074,7 +3010,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Single Leg DB Calf Raise",
+        "exercise": "Single Leg DB Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -3091,14 +3027,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 6,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 10,
@@ -3120,7 +3052,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -3142,7 +3074,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 10,
@@ -3164,7 +3096,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -3182,7 +3114,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 12,
@@ -3199,14 +3131,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 6,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 8,
@@ -3228,7 +3156,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 10,
@@ -3250,7 +3178,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -3272,7 +3200,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "sets": [
           {
             "reps": 12,
@@ -3294,7 +3222,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -3311,14 +3239,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 6,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "T-bar Row",
+        "exercise": "T-bar Row",
         "sets": [
           {
             "reps": 10,
@@ -3340,7 +3264,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Bulgarian Split Squat",
+        "exercise": "Bulgarian Split Squat",
         "sets": [
           {
             "reps": 12,
@@ -3358,7 +3282,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Incline Cable Chest Flye",
+        "exercise": "Incline Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -3376,7 +3300,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Overhead Extension",
+        "exercise": "Cable Overhead Extension",
         "sets": [
           {
             "reps": 12,
@@ -3398,7 +3322,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Crunch",
+        "exercise": "Reverse Crunch",
         "sets": [
           {
             "reps": 15,
@@ -3416,7 +3340,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Seated Calf Press",
+        "exercise": "Seated Calf Press",
         "sets": [
           {
             "reps": 15,
@@ -3433,14 +3357,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 6,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 12,
@@ -3462,7 +3382,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 20,
@@ -3484,7 +3404,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Romanian Deadlift",
+        "exercise": "Romanian Deadlift",
         "sets": [
           {
             "reps": 12,
@@ -3506,7 +3426,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 24,
@@ -3524,7 +3444,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Pec Deck",
+        "exercise": "Reverse Pec Deck",
         "sets": [
           {
             "reps": 12,
@@ -3543,12 +3463,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 7,
-    "day": 1,
-    "exercises": [
+  "week7": {
+    "day1": [
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 8,
@@ -3570,7 +3488,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 8,
@@ -3592,7 +3510,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Chest supported Row",
+        "exercise": "Chest supported Row",
         "sets": [
           {
             "reps": 10,
@@ -3610,7 +3528,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -3632,7 +3550,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Kneeling Cable Crunch",
+        "exercise": "Kneeling Cable Crunch",
         "sets": [
           {
             "reps": 15,
@@ -3654,7 +3572,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Single Leg DB Calf Raise",
+        "exercise": "Single Leg DB Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -3671,14 +3589,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 7,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 8,
@@ -3700,7 +3614,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down (close grip)",
+        "exercise": "Lat Pull-down (close grip)",
         "sets": [
           {
             "reps": 10,
@@ -3722,7 +3636,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 10,
@@ -3744,7 +3658,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -3766,7 +3680,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 10,
@@ -3783,14 +3697,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 7,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 8,
@@ -3812,7 +3722,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 8,
@@ -3834,7 +3744,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -3856,7 +3766,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "sets": [
           {
             "reps": 10,
@@ -3878,7 +3788,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -3899,14 +3809,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 7,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "T-bar Row",
+        "exercise": "T-bar Row",
         "sets": [
           {
             "reps": 10,
@@ -3928,7 +3834,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Bulgarian Split Squat",
+        "exercise": "Bulgarian Split Squat",
         "sets": [
           {
             "reps": 10,
@@ -3946,7 +3852,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Incline Cable Chest Flye",
+        "exercise": "Incline Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -3968,7 +3874,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Overhead Extension",
+        "exercise": "Cable Overhead Extension",
         "sets": [
           {
             "reps": 10,
@@ -3990,7 +3896,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Crunch",
+        "exercise": "Reverse Crunch",
         "sets": [
           {
             "reps": 15,
@@ -4008,7 +3914,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Seated Calf Press",
+        "exercise": "Seated Calf Press",
         "sets": [
           {
             "reps": 15,
@@ -4025,14 +3931,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 7,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down (wide grip)",
+        "exercise": "Lat Pull-down (wide grip)",
         "sets": [
           {
             "reps": 10,
@@ -4054,7 +3956,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 16,
@@ -4076,7 +3978,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Romanian Deadlift",
+        "exercise": "Romanian Deadlift",
         "sets": [
           {
             "reps": 12,
@@ -4098,7 +4000,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Curl",
+        "exercise": "DB Curl",
         "sets": [
           {
             "reps": 20,
@@ -4120,7 +4022,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Pec Deck",
+        "exercise": "Reverse Pec Deck",
         "sets": [
           {
             "reps": 12,
@@ -4143,12 +4045,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 8,
-    "day": 1,
-    "exercises": [
+  "week8": {
+    "day1": [
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 8,
@@ -4170,7 +4070,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 8,
@@ -4192,7 +4092,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Chest supported Row",
+        "exercise": "Chest supported Row",
         "sets": [
           {
             "reps": 10,
@@ -4210,7 +4110,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -4232,7 +4132,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Kneeling Cable Crunch",
+        "exercise": "Kneeling Cable Crunch",
         "sets": [
           {
             "reps": 15,
@@ -4254,7 +4154,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Single Leg DB Calf Raise",
+        "exercise": "Single Leg DB Calf Raise",
         "sets": [
           {
             "reps": 15,
@@ -4271,14 +4171,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 8,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 8,
@@ -4300,7 +4196,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Lat Pull-down (close grip)",
+        "exercise": "Lat Pull-down (close grip)",
         "sets": [
           {
             "reps": 10,
@@ -4322,7 +4218,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 10,
@@ -4344,7 +4240,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -4366,7 +4262,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 10,
@@ -4383,14 +4279,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 8,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 8,
@@ -4412,7 +4304,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Incline DB Press",
+        "exercise": "Incline DB Press",
         "sets": [
           {
             "reps": 8,
@@ -4434,7 +4326,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 12,
@@ -4456,7 +4348,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "sets": [
           {
             "reps": 10,
@@ -4478,7 +4370,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 12,
@@ -4499,14 +4391,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 8,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "T-bar Row",
+        "exercise": "T-bar Row",
         "sets": [
           {
             "reps": 10,
@@ -4528,7 +4416,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Bulgarian Split Squat",
+        "exercise": "Bulgarian Split Squat",
         "sets": [
           {
             "reps": 10,
@@ -4546,7 +4434,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Incline Cable Chest Flye",
+        "exercise": "Incline Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -4568,7 +4456,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Cable Overhead Extension",
+        "exercise": "Cable Overhead Extension",
         "sets": [
           {
             "reps": 10,
@@ -4590,7 +4478,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Crunch",
+        "exercise": "Reverse Crunch",
         "sets": [
           {
             "reps": 15,
@@ -4608,7 +4496,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Seated Calf Press",
+        "exercise": "Seated Calf Press",
         "sets": [
           {
             "reps": 15,
@@ -4625,14 +4513,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 8,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "Lat Pull-down (wide grip)",
+        "exercise": "Lat Pull-down (wide grip)",
         "sets": [
           {
             "reps": 10,
@@ -4654,7 +4538,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Alternate DB Shoulder Press",
+        "exercise": "Alternate DB Shoulder Press",
         "sets": [
           {
             "reps": 16,
@@ -4676,7 +4560,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Romanian Deadlift",
+        "exercise": "Romanian Deadlift",
         "sets": [
           {
             "reps": 12,
@@ -4698,7 +4582,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Curl",
+        "exercise": "DB Curl",
         "sets": [
           {
             "reps": 20,
@@ -4720,7 +4604,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Pec Deck",
+        "exercise": "Reverse Pec Deck",
         "sets": [
           {
             "reps": 12,
@@ -4743,12 +4627,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 9,
-    "day": 1,
-    "exercises": [
+  "week9": {
+    "day1": [
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 5,
@@ -4770,7 +4652,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 8,
@@ -4792,7 +4674,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 10,
@@ -4810,7 +4692,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "sets": [
           {
             "reps": 8,
@@ -4828,7 +4710,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Decline Crunch (no weight)",
+        "exercise": "Decline Crunch (no weight)",
         "sets": [
           {
             "reps": 15,
@@ -4850,7 +4732,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Rear Delt Cable Flye",
+        "exercise": "Rear Delt Cable Flye",
         "sets": [
           {
             "reps": 10,
@@ -4867,14 +4749,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 9,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 5,
@@ -4896,7 +4774,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 6,
@@ -4918,7 +4796,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 8,
@@ -4940,7 +4818,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Tricep Skullcrusher",
+        "exercise": "DB Tricep Skullcrusher",
         "sets": [
           {
             "reps": 8,
@@ -4958,7 +4836,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 12,
@@ -4979,14 +4857,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 9,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 8,
@@ -5008,7 +4882,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 6,
@@ -5030,7 +4904,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 10,
@@ -5052,7 +4926,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Incline Cable Chest Flye",
+        "exercise": "Incline Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -5070,7 +4944,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Crunch",
+        "exercise": "Reverse Crunch",
         "sets": [
           {
             "reps": 10,
@@ -5091,14 +4965,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 9,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 6,
@@ -5120,7 +4990,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 5,
@@ -5142,7 +5012,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 8,
@@ -5164,7 +5034,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 10,
@@ -5186,7 +5056,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Seated Calf Press",
+        "exercise": "Seated Calf Press",
         "sets": [
           {
             "reps": 12,
@@ -5203,14 +5073,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 9,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 6,
@@ -5232,7 +5098,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 5,
@@ -5254,7 +5120,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 8,
@@ -5276,7 +5142,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 8,
@@ -5294,7 +5160,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Bicep Curl",
+        "exercise": "DB Bicep Curl",
         "sets": [
           {
             "reps": 16,
@@ -5312,7 +5178,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Standing Cable Chest Flye",
+        "exercise": "Standing Cable Chest Flye",
         "sets": [
           {
             "reps": 12,
@@ -5331,12 +5197,10 @@ export const workoutData: Workout[] = [
       }
     ]
   },
-  {
-    "week": 10,
-    "day": 1,
-    "exercises": [
+  "week10": {
+    "day1": [
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 5,
@@ -5358,7 +5222,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 8,
@@ -5380,7 +5244,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "DB Lateral Raise",
+        "exercise": "DB Lateral Raise",
         "sets": [
           {
             "reps": 10,
@@ -5398,7 +5262,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "sets": [
           {
             "reps": 8,
@@ -5416,7 +5280,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Decline Crunch (weighted)",
+        "exercise": "Decline Crunch (weighted)",
         "sets": [
           {
             "reps": 15,
@@ -5438,7 +5302,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Rear Delt Cable Flye",
+        "exercise": "Rear Delt Cable Flye",
         "sets": [
           {
             "reps": 10,
@@ -5455,14 +5319,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 10,
-    "day": 2,
-    "exercises": [
+    ],
+    "day2": [
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 5,
@@ -5484,7 +5344,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 6,
@@ -5506,7 +5366,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "sets": [
           {
             "reps": 8,
@@ -5528,7 +5388,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "DB Tricep Skull Crusher",
+        "exercise": "DB Tricep Skull Crusher",
         "sets": [
           {
             "reps": 8,
@@ -5546,7 +5406,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Smith Machine Calf Raise",
+        "exercise": "Smith Machine Calf Raise",
         "sets": [
           {
             "reps": 12,
@@ -5567,14 +5427,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 10,
-    "day": 3,
-    "exercises": [
+    ],
+    "day3": [
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 8,
@@ -5596,7 +5452,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 6,
@@ -5618,7 +5474,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "sets": [
           {
             "reps": 10,
@@ -5640,7 +5496,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Incline Cable Flye",
+        "exercise": "Incline Cable Flye",
         "sets": [
           {
             "reps": 12,
@@ -5658,7 +5514,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Reverse Crunch",
+        "exercise": "Reverse Crunch",
         "sets": [
           {
             "reps": 10,
@@ -5679,14 +5535,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 10,
-    "day": 4,
-    "exercises": [
+    ],
+    "day4": [
       {
-        "name": "BB Bench Press",
+        "exercise": "BB Bench Press",
         "sets": [
           {
             "reps": 6,
@@ -5708,7 +5560,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Back Squat",
+        "exercise": "Back Squat",
         "sets": [
           {
             "reps": 5,
@@ -5730,7 +5582,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Chest Supported Row",
+        "exercise": "Chest Supported Row",
         "sets": [
           {
             "reps": 8,
@@ -5752,7 +5604,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Cable Lateral Raise",
+        "exercise": "Cable Lateral Raise",
         "sets": [
           {
             "reps": 10,
@@ -5774,7 +5626,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Seated Calf Press",
+        "exercise": "Seated Calf Press",
         "sets": [
           {
             "reps": 12,
@@ -5791,14 +5643,10 @@ export const workoutData: Workout[] = [
         ],
         "rest": "1"
       }
-    ]
-  },
-  {
-    "week": 10,
-    "day": 5,
-    "exercises": [
+    ],
+    "day5": [
       {
-        "name": "BB Overhead Press",
+        "exercise": "BB Overhead Press",
         "sets": [
           {
             "reps": 6,
@@ -5820,7 +5668,7 @@ export const workoutData: Workout[] = [
         "rest": "2-3"
       },
       {
-        "name": "Sumo Deadlift",
+        "exercise": "Sumo Deadlift",
         "sets": [
           {
             "reps": 5,
@@ -5842,7 +5690,7 @@ export const workoutData: Workout[] = [
         "rest": "3-4"
       },
       {
-        "name": "Lat Pull-down",
+        "exercise": "Lat Pull-down",
         "sets": [
           {
             "reps": 8,
@@ -5860,7 +5708,7 @@ export const workoutData: Workout[] = [
         "rest": "1-2"
       },
       {
-        "name": "Cable Pushdown",
+        "exercise": "Cable Pushdown",
         "sets": [
           {
             "reps": 8,
@@ -5878,7 +5726,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "DB Curl",
+        "exercise": "DB Curl",
         "sets": [
           {
             "reps": 16,
@@ -5896,7 +5744,7 @@ export const workoutData: Workout[] = [
         "rest": "1"
       },
       {
-        "name": "Standing Cable Flye",
+        "exercise": "Standing Cable Flye",
         "sets": [
           {
             "reps": 12,
@@ -5915,20 +5763,4 @@ export const workoutData: Workout[] = [
       }
     ]
   }
-];
-
-export function getWorkout(week: number, day: number): Workout | undefined {
-  return workoutData.find(w => w.week === week && w.day === day);
-}
-
-export function getAvailableWeeks(): number[] {
-  const weeks = new Set(workoutData.map(w => w.week));
-  return Array.from(weeks).sort((a, b) => a - b);
-}
-
-export function getDaysForWeek(week: number): number[] {
-  const days = workoutData
-    .filter(w => w.week === week)
-    .map(w => w.day);
-  return Array.from(new Set(days)).sort((a, b) => a - b);
 }
