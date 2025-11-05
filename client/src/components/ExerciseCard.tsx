@@ -64,6 +64,8 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises }: Exerc
             <div className="flex-1 relative">
               <Input
                 type="number"
+                inputMode="decimal"
+                step="0.5"
                 placeholder="Add Weight"
                 className="pr-12"
                 data-testid="input-weight"
