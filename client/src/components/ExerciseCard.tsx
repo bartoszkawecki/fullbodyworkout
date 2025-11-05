@@ -54,8 +54,15 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
   });
 
   const handleSave = () => {
-    saveMutation.mutate();
+    if (weight && parseFloat(weight) > 0 && !saveMutation.isPending && !showSuccess) {
+      saveMutation.mutate();
+    }
   };
+
+  const handleBlur = () => {
+    handleSave();
+  };
+
   return (
     <Card className="border" data-testid={`card-exercise-${exerciseNumber}`}>
       <div className="p-6 space-y-4">
@@ -115,6 +122,7 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
                 className="pr-12"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
+                onBlur={handleBlur}
                 data-testid="input-weight"
               />
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
