@@ -4,7 +4,8 @@ import { getWorkout } from "@shared/workoutData";
 import { ExerciseCard } from "@/components/ExerciseCard";
 import { CompletionCelebration } from "@/components/CompletionCelebration";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { markDayCompleted } from "@/lib/storage";
 
 export default function Workout() {
@@ -47,6 +48,7 @@ export default function Workout() {
   }
 
   const isLastExercise = currentExercise === workout.exercises.length - 1;
+  const nextExercise = !isLastExercise ? workout.exercises[currentExercise + 1] : null;
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -79,12 +81,26 @@ export default function Workout() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-6">
+      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
         <ExerciseCard
           exercise={workout.exercises[currentExercise]}
           exerciseNumber={currentExercise + 1}
           totalExercises={workout.exercises.length}
         />
+
+        {nextExercise && (
+          <Card className="p-4 border" data-testid="card-next-exercise">
+            <div className="flex items-center gap-3">
+              <ArrowRight className="h-5 w-5 text-muted-foreground" />
+              <div>
+                <p className="text-sm text-muted-foreground">Next exercise:</p>
+                <p className="font-semibold" data-testid="text-next-exercise-name">
+                  {nextExercise.name}
+                </p>
+              </div>
+            </div>
+          </Card>
+        )}
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
