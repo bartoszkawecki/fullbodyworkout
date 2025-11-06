@@ -60,6 +60,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete("/api/weights/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      if (Number.isNaN(id) || id <= 0) {
+        return res.status(400).json({ error: "Invalid weight ID" });
+      }
+      await storage.deleteWeight(id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting weight:", error);
+      res.status(500).json({ error: "Failed to delete weight" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

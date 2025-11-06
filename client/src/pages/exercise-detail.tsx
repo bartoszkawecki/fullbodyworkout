@@ -1,10 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation, useParams } from "wouter";
 import type { ExerciseWeight } from "@shared/schema";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 
 export default function ExerciseDetail() {
   const [, setLocation] = useLocation();
@@ -13,6 +14,16 @@ export default function ExerciseDetail() {
 
   const { data: history, isLoading } = useQuery<ExerciseWeight[]>({
     queryKey: [`/api/weights/history/${encodeURIComponent(exerciseName)}`],
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      return apiRequest("DELETE", `/api/weights/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [`/api/weights/history/${encodeURIComponent(exerciseName)}`] });
+      queryClient.invalidateQueries({ queryKey: ["/api/exercise-stats"] });
+    },
   });
 
   const recordCount = history?.length || 0;
@@ -120,16 +131,17 @@ export default function ExerciseDetail() {
               </div>
 
               <div className="space-y-2">
-                <div className="grid grid-cols-2 gap-4 pb-2 border-b font-semibold text-sm">
+                <div className="grid grid-cols-[1fr,1fr,auto] gap-4 pb-2 border-b font-semibold text-sm">
                   <div>Workout</div>
                   <div>Weight</div>
+                  <div></div>
                 </div>
                 {sortedHistoryDescending.map((record, index) => {
                   const isBestRep = parseFloat(record.weight) === bestWeight;
                   return (
                     <div
                       key={index}
-                      className={`grid grid-cols-2 gap-4 py-2 border-b last:border-b-0 ${
+                      className={`grid grid-cols-[1fr,1fr,auto] gap-4 py-2 border-b last:border-b-0 items-center ${
                         isBestRep ? 'bg-primary text-primary-foreground font-bold rounded-md -mx-2 px-2' : ''
                       }`}
                       data-testid={`row-history-${index}`}
@@ -140,6 +152,16 @@ export default function ExerciseDetail() {
                       <div data-testid={`text-weight-${index}`}>
                         {parseFloat(record.weight)} kg
                       </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => deleteMutation.mutate(record.id)}
+                        disabled={deleteMutation.isPending}
+                        data-testid={`button-delete-${index}`}
+                        className={isBestRep ? 'hover:bg-primary-foreground/20' : ''}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </div>
                   );
                 })}

@@ -14,6 +14,7 @@ export interface IStorage {
   getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]>;
   getExerciseStats(): Promise<ExerciseStats[]>;
   deleteAllWeights(): Promise<void>;
+  deleteWeight(id: number): Promise<void>;
 }
 
 export class DbStorage implements IStorage {
@@ -84,6 +85,10 @@ export class DbStorage implements IStorage {
 
   async deleteAllWeights(): Promise<void> {
     await db.delete(exerciseWeights);
+  }
+
+  async deleteWeight(id: number): Promise<void> {
+    await db.delete(exerciseWeights).where(eq(exerciseWeights.id, id));
   }
 }
 
