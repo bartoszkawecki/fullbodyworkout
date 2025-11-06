@@ -132,4 +132,29 @@ export function registerAuthRoutes(app: Express) {
       res.status(500).json({ message: error.message || "Failed to fetch invites" });
     }
   });
+
+  // Admin route to generate invite (uses secret instead of auth)
+  app.post("/api/admin/generate-invite", async (req: Request, res: Response) => {
+    try {
+      const { secret } = req.body;
+      
+      // Check admin secret
+      const adminSecret = process.env.ADMIN_SECRET || 'change-me-in-production';
+      if (secret !== adminSecret) {
+        return res.status(403).json({ message: "Invalid admin secret" });
+      }
+
+      // Generate random invite code
+      const code = crypto.randomBytes(8).toString("hex").toUpperCase();
+
+      const [invite] = await db
+        .insert(invites)
+        .values({ code })
+        .returning();
+
+      res.json({ invite, message: "Invite code generated successfully" });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to generate invite" });
+    }
+  });
 }
