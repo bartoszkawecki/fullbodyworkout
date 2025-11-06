@@ -130,7 +130,7 @@ export default function ExerciseDetail() {
                     <div
                       key={index}
                       className={`grid grid-cols-2 gap-4 py-2 border-b last:border-b-0 ${
-                        isBestRep ? 'bg-primary text-primary-foreground rounded-md -mx-2 px-2' : ''
+                        isBestRep ? 'bg-primary text-primary-foreground font-bold rounded-md -mx-2 px-2' : ''
                       }`}
                       data-testid={`row-history-${index}`}
                     >
