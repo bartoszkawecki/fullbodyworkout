@@ -1,6 +1,12 @@
 
 // Quick script to generate an invite code using the admin route
-const response = await fetch('http://localhost:5000/api/admin/generate-invite', {
+const serverUrl = process.env.REPL_SLUG 
+  ? `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co`
+  : 'http://0.0.0.0:5000';
+
+console.log(`Connecting to: ${serverUrl}`);
+
+const response = await fetch(`${serverUrl}/api/admin/generate-invite`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -18,4 +24,6 @@ console.log('Response:', JSON.stringify(data, null, 2));
 if (data.invite?.code) {
   console.log('\n✅ Your invite code:', data.invite.code);
   console.log('\nUse this code to register with Google OAuth');
+} else if (data.message) {
+  console.log('\n❌ Error:', data.message);
 }
