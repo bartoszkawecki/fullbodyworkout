@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,7 @@ interface ExerciseCardProps {
 export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, day }: ExerciseCardProps) {
   const [weight, setWeight] = useState<string>("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const isSavingRef = useRef(false);
 
   const { data: existingWeight } = useQuery<ExerciseWeight | null>({
     queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`],
@@ -44,6 +45,7 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
       });
     },
     onSuccess: () => {
+      isSavingRef.current = false;
       setShowSuccess(true);
       queryClient.invalidateQueries({ queryKey: ["/api/exercise-stats"] });
       setTimeout(() => {
@@ -51,16 +53,20 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
         queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
       }, 2000);
     },
+    onError: () => {
+      isSavingRef.current = false;
+    },
   });
 
   const handleSave = () => {
-    if (weight && parseFloat(weight) > 0 && !saveMutation.isPending && !showSuccess) {
+    if (weight && parseFloat(weight) > 0 && !isSavingRef.current && !showSuccess) {
+      isSavingRef.current = true;
       saveMutation.mutate();
     }
   };
 
   const handleBlur = () => {
-    if (!saveMutation.isPending && !showSuccess) {
+    if (!isSavingRef.current && !showSuccess) {
       handleSave();
     }
   };
