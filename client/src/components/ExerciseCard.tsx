@@ -25,6 +25,10 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
     queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`],
   });
 
+  const { data: weightHistory = [] } = useQuery<ExerciseWeight[]>({
+    queryKey: [`/api/weights/history/${encodeURIComponent(exercise.name)}`],
+  });
+
   useEffect(() => {
     if (existingWeight?.weight && weight === "") {
       setWeight(existingWeight.weight);
@@ -48,6 +52,7 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
       isSavingRef.current = false;
       setShowSuccess(true);
       queryClient.invalidateQueries({ queryKey: ["/api/exercise-stats"] });
+      queryClient.invalidateQueries({ queryKey: [`/api/weights/history/${encodeURIComponent(exercise.name)}`] });
       setTimeout(() => {
         setShowSuccess(false);
         queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
@@ -70,6 +75,10 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
       handleSave();
     }
   };
+
+  const bestRep = weightHistory.length > 0
+    ? Math.max(...weightHistory.map(w => parseFloat(w.weight)))
+    : null;
 
   return (
     <Card className="border" data-testid={`card-exercise-${exerciseNumber}`}>
@@ -146,6 +155,11 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
               {saveMutation.isPending || showSuccess ? "👌" : "Save"}
             </Button>
           </div>
+          {bestRep !== null && (
+            <p className="text-sm text-muted-foreground mt-2" data-testid="text-best-rep">
+              Best rep: {bestRep.toFixed(2)} kg
+            </p>
+          )}
         </div>
       </div>
     </Card>
