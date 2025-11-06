@@ -40,6 +40,17 @@ export default function ExerciseDetail() {
         }))
     : [];
 
+  // Fix for ReferenceError: sortedHistory is not defined
+  const exerciseHistory = history; // Alias for clarity
+  const sortedHistory = [...(exerciseHistory || [])].sort((a, b) => {
+    if (a.week !== b.week) return a.week - b.week;
+    return a.day - b.day;
+  });
+
+  const lastWeight = sortedHistory.length > 0 
+    ? sortedHistory[sortedHistory.length - 1].weight 
+    : null;
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
@@ -70,7 +81,7 @@ export default function ExerciseDetail() {
 
         <Card className="p-6">
           <h2 className="text-xl font-semibold mb-4">History</h2>
-          
+
           {isLoading ? (
             <div className="text-center py-8 text-muted-foreground">
               Loading...
