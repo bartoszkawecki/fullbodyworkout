@@ -1,9 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { getCompletedDaysForWeek } from "@/lib/storage";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCompletions } from "@/lib/storage";
 import { getBlockForWeek } from "@shared/workoutData";
+import type { Completion } from "@shared/schema";
 
 interface WeekCardProps {
   week: number;
@@ -12,16 +13,16 @@ interface WeekCardProps {
 }
 
 export function WeekCard({ week, totalDays, onClick }: WeekCardProps) {
-  const [completedDays, setCompletedDays] = useState(getCompletedDaysForWeek(week));
+  const { data: completions = [] } = useQuery<Completion[]>({
+    queryKey: ["/api/completions"],
+    queryFn: fetchCompletions,
+    staleTime: 30000,
+    placeholderData: (previousData) => previousData,
+  });
+
+  const completedDays = completions.filter(c => c.week === week).length;
   const isFullyCompleted = completedDays === totalDays;
   const blockName = getBlockForWeek(week);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCompletedDays(getCompletedDaysForWeek(week));
-    }, 500);
-    return () => clearInterval(interval);
-  }, [week]);
 
   return (
     <Card

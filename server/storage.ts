@@ -1,4 +1,4 @@
-import { type ExerciseWeight, type InsertExerciseWeight, exerciseWeights } from "@shared/schema";
+import { type ExerciseWeight, type InsertExerciseWeight, exerciseWeights, type Completion, type InsertCompletion, completions } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, sql } from "drizzle-orm";
 
@@ -15,6 +15,9 @@ export interface IStorage {
   getExerciseStats(): Promise<ExerciseStats[]>;
   deleteAllWeights(): Promise<void>;
   deleteWeight(id: number): Promise<void>;
+  getCompletions(): Promise<Completion[]>;
+  toggleDayCompletion(week: number, day: number): Promise<boolean>;
+  deleteAllCompletions(): Promise<void>;
 }
 
 export class DbStorage implements IStorage {
@@ -89,6 +92,31 @@ export class DbStorage implements IStorage {
 
   async deleteWeight(id: number): Promise<void> {
     await db.delete(exerciseWeights).where(eq(exerciseWeights.id, id));
+  }
+
+  async getCompletions(): Promise<Completion[]> {
+    return db.select().from(completions);
+  }
+
+  async toggleDayCompletion(week: number, day: number): Promise<boolean> {
+    const [existing] = await db
+      .select()
+      .from(completions)
+      .where(and(eq(completions.week, week), eq(completions.day, day)));
+
+    if (existing) {
+      await db
+        .delete(completions)
+        .where(and(eq(completions.week, week), eq(completions.day, day)));
+      return false;
+    } else {
+      await db.insert(completions).values({ week, day });
+      return true;
+    }
+  }
+
+  async deleteAllCompletions(): Promise<void> {
+    await db.delete(completions);
   }
 }
 

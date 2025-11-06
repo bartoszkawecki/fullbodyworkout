@@ -6,7 +6,9 @@ import { CompletionCelebration } from "@/components/CompletionCelebration";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight, Search } from "lucide-react";
-import { markDayCompleted } from "@/lib/storage";
+import { toggleDayCompletion, fetchCompletions } from "@/lib/storage";
+import { useQuery } from "@tanstack/react-query";
+import type { Completion } from "@shared/schema";
 
 export default function Workout() {
   const [, params] = useRoute("/week/:week/day/:day");
@@ -15,6 +17,15 @@ export default function Workout() {
   const day = parseInt(params?.day || "1");
   const workout = getWorkout(week, day);
   const blockName = getBlockForWeek(week);
+
+  const { data: completions = [] } = useQuery<Completion[]>({
+    queryKey: ["/api/completions"],
+    queryFn: fetchCompletions,
+    staleTime: 30000,
+    placeholderData: (previousData) => previousData,
+  });
+
+  const isDayCompleted = completions.some(c => c.week === week && c.day === day);
 
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -51,8 +62,10 @@ export default function Workout() {
     }
   };
 
-  const handleComplete = () => {
-    markDayCompleted(week, day);
+  const handleComplete = async () => {
+    if (!isDayCompleted) {
+      await toggleDayCompletion(week, day);
+    }
     setIsCompleted(true);
     console.log(`Completed Week ${week}, Day ${day}`);
   };

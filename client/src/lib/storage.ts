@@ -1,19 +1,36 @@
-import { CompletionStatus } from "@shared/schema";
+import { CompletionStatus, type Completion } from "@shared/schema";
+import { queryClient } from "./queryClient";
 
-const STORAGE_KEY = "workout-completion-status";
+let completionsCache: Completion[] | null = null;
 
-export function getCompletionStatus(): CompletionStatus {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (!stored) return {};
-  try {
-    return JSON.parse(stored);
-  } catch {
-    return {};
+export async function fetchCompletions(): Promise<Completion[]> {
+  const response = await fetch("/api/completions");
+  if (!response.ok) {
+    throw new Error("Failed to fetch completions");
   }
+  const data = await response.json();
+  completionsCache = data;
+  return data;
 }
 
-export function setCompletionStatus(status: CompletionStatus): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(status));
+function completionsToStatus(completions: Completion[]): CompletionStatus {
+  const status: CompletionStatus = {};
+  for (const completion of completions) {
+    const weekKey = `week${completion.week}`;
+    const dayKey = `day${completion.day}`;
+    if (!status[weekKey]) {
+      status[weekKey] = {};
+    }
+    status[weekKey][dayKey] = true;
+  }
+  return status;
+}
+
+export function getCompletionStatus(): CompletionStatus {
+  if (!completionsCache) {
+    return {};
+  }
+  return completionsToStatus(completionsCache);
 }
 
 export function isDayCompleted(week: number, day: number): boolean {
@@ -21,22 +38,20 @@ export function isDayCompleted(week: number, day: number): boolean {
   return status[`week${week}`]?.[`day${day}`] ?? false;
 }
 
-export function markDayCompleted(week: number, day: number): void {
-  const status = getCompletionStatus();
-  if (!status[`week${week}`]) {
-    status[`week${week}`] = {};
+export async function toggleDayCompletion(week: number, day: number): Promise<void> {
+  const response = await fetch("/api/completions/toggle", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ week, day }),
+  });
+  
+  if (!response.ok) {
+    throw new Error("Failed to toggle completion");
   }
-  status[`week${week}`][`day${day}`] = true;
-  setCompletionStatus(status);
-}
-
-export function toggleDayCompletion(week: number, day: number): void {
-  const status = getCompletionStatus();
-  if (!status[`week${week}`]) {
-    status[`week${week}`] = {};
-  }
-  status[`week${week}`][`day${day}`] = !status[`week${week}`][`day${day}`];
-  setCompletionStatus(status);
+  
+  queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
 }
 
 export function getCompletedDaysForWeek(week: number): number {

@@ -74,6 +74,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/completions", async (req, res) => {
+    try {
+      const completions = await storage.getCompletions();
+      res.json(completions);
+    } catch (error) {
+      console.error("Error getting completions:", error);
+      res.status(500).json({ error: "Failed to get completions" });
+    }
+  });
+
+  app.post("/api/completions/toggle", async (req, res) => {
+    try {
+      const { week, day } = req.body;
+      if (typeof week !== "number" || typeof day !== "number") {
+        return res.status(400).json({ error: "Invalid week or day" });
+      }
+      const isCompleted = await storage.toggleDayCompletion(week, day);
+      res.json({ isCompleted });
+    } catch (error) {
+      console.error("Error toggling completion:", error);
+      res.status(500).json({ error: "Failed to toggle completion" });
+    }
+  });
+
+  app.delete("/api/completions", async (req, res) => {
+    try {
+      await storage.deleteAllCompletions();
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting all completions:", error);
+      res.status(500).json({ error: "Failed to delete all completions" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

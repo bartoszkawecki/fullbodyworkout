@@ -3,6 +3,9 @@ import { getDaysForWeek, getBlockForWeek } from "@shared/workoutData";
 import { useLocation, useRoute } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCompletions } from "@/lib/storage";
+import type { Completion } from "@shared/schema";
 
 export default function Week() {
   const [, params] = useRoute("/week/:week");
@@ -10,6 +13,13 @@ export default function Week() {
   const week = parseInt(params?.week || "1");
   const days = getDaysForWeek(week);
   const blockName = getBlockForWeek(week);
+  
+  useQuery<Completion[]>({
+    queryKey: ["/api/completions"],
+    queryFn: fetchCompletions,
+    staleTime: 30000,
+    placeholderData: (previousData) => previousData,
+  });
 
   return (
     <div className="min-h-screen bg-background">

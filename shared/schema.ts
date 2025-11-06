@@ -42,3 +42,15 @@ export const exerciseWeights = pgTable("exercise_weights", {
 export const insertExerciseWeightSchema = createInsertSchema(exerciseWeights).omit({ id: true });
 export type InsertExerciseWeight = z.infer<typeof insertExerciseWeightSchema>;
 export type ExerciseWeight = typeof exerciseWeights.$inferSelect;
+
+export const completions = pgTable("completions", {
+  id: serial("id").primaryKey(),
+  week: integer("week").notNull(),
+  day: integer("day").notNull(),
+}, (table) => ({
+  uniqueCompletion: unique("unique_completion").on(table.week, table.day),
+}));
+
+export const insertCompletionSchema = createInsertSchema(completions).omit({ id: true });
+export type InsertCompletion = z.infer<typeof insertCompletionSchema>;
+export type Completion = typeof completions.$inferSelect;

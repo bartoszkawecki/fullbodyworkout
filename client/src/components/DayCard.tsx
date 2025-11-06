@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { CheckCircle2, Circle } from "lucide-react";
-import { useState } from "react";
-import { isDayCompleted, toggleDayCompletion } from "@/lib/storage";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCompletions, toggleDayCompletion } from "@/lib/storage";
+import type { Completion } from "@shared/schema";
 
 interface DayCardProps {
   week: number;
@@ -10,13 +11,23 @@ interface DayCardProps {
 }
 
 export function DayCard({ week, day, onClick }: DayCardProps) {
-  const [completed, setCompleted] = useState(isDayCompleted(week, day));
+  const { data: completions = [] } = useQuery<Completion[]>({
+    queryKey: ["/api/completions"],
+    queryFn: fetchCompletions,
+    staleTime: 30000,
+    placeholderData: (previousData) => previousData,
+  });
 
-  const handleToggleCompletion = (e: React.MouseEvent) => {
+  const completed = completions.some(c => c.week === week && c.day === day);
+
+  const handleToggleCompletion = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    toggleDayCompletion(week, day);
-    setCompleted(!completed);
-    console.log(`Toggled completion for Week ${week}, Day ${day}`);
+    try {
+      await toggleDayCompletion(week, day);
+      console.log(`Toggled completion for Week ${week}, Day ${day}`);
+    } catch (error) {
+      console.error("Failed to toggle completion:", error);
+    }
   };
 
   return (

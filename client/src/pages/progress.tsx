@@ -15,7 +15,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { setCompletionStatus } from "@/lib/storage";
 import { apiRequest } from "@/lib/queryClient";
 
 interface ExerciseStats {
@@ -37,10 +36,10 @@ export default function Progress() {
 
   const resetMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest("DELETE", "/api/weights");
+      await apiRequest("DELETE", "/api/weights");
+      await apiRequest("DELETE", "/api/completions");
     },
     onSuccess: () => {
-      setCompletionStatus({});
       window.location.reload();
     },
   });

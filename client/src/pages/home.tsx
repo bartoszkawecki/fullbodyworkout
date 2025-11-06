@@ -3,10 +3,20 @@ import { getAvailableWeeks, getDaysForWeek } from "@shared/workoutData";
 import { useLocation } from "wouter";
 import { Dumbbell, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCompletions } from "@/lib/storage";
+import type { Completion } from "@shared/schema";
 
 export default function Home() {
   const [, setLocation] = useLocation();
   const availableWeeks = getAvailableWeeks();
+  
+  useQuery<Completion[]>({
+    queryKey: ["/api/completions"],
+    queryFn: fetchCompletions,
+    staleTime: 30000,
+    placeholderData: (previousData) => previousData,
+  });
 
   return (
     <div className="min-h-screen bg-background">
