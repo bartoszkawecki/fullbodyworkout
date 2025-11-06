@@ -1,6 +1,6 @@
 
 // Quick script to generate an invite code using the admin route
-const response = await fetch('https://f30c2164-774a-4462-812c-1324e0d79b6e-00-chdmn9da0lg5.kirk.replit.dev/api/admin/generate-invite', {
+const response = await fetch('http://localhost:5000/api/admin/generate-invite', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
