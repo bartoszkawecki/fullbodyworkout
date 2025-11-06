@@ -31,10 +31,29 @@ export function registerAuthRoutes(app: Express) {
   // Google OAuth callback
   app.get(
     "/api/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login?error=auth_failed" }),
-    (req: Request, res: Response) => {
-      // Successful authentication
-      res.redirect("/");
+    (req: Request, res: Response, next) => {
+      passport.authenticate("google", (err: any, user: any, info: any) => {
+        if (err) {
+          console.error("OAuth error:", err);
+          return res.redirect("/login?error=auth_failed");
+        }
+        
+        if (!user) {
+          if (info?.message === "invite_required") {
+            // New user needs an invite - you could redirect to an invite page here
+            return res.redirect("/login?error=invite_required");
+          }
+          return res.redirect("/login?error=auth_failed");
+        }
+        
+        req.login(user, (loginErr) => {
+          if (loginErr) {
+            console.error("Login error:", loginErr);
+            return res.redirect("/login?error=auth_failed");
+          }
+          res.redirect("/");
+        });
+      })(req, res, next);
     }
   );
 
