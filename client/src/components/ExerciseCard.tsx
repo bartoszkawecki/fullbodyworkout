@@ -60,7 +60,9 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
   };
 
   const handleBlur = () => {
-    handleSave();
+    if (!saveMutation.isPending && !showSuccess) {
+      handleSave();
+    }
   };
 
   return (
