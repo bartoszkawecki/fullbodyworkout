@@ -1,50 +1,96 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { insertExerciseWeightSchema } from "@shared/schema";
+import { db } from "./db";
+import { exerciseWeights } from "@shared/schema";
+import { eq, and } from "drizzle-orm";
+import { registerAuthRoutes } from "./authRoutes";
+
+// Middleware to require authentication
+function requireAuth(req: Request, res: Response, next: NextFunction) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: "Authentication required" });
+  }
+  next();
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  app.post("/api/weights", async (req, res) => {
+  // Register authentication routes
+  registerAuthRoutes(app);
+
+  app.post("/api/weights", requireAuth, async (req, res) => {
     try {
-      const data = insertExerciseWeightSchema.parse(req.body);
-      const saved = await storage.saveExerciseWeight(data);
-      res.json(saved);
-    } catch (error) {
-      console.error("Error saving weight:", error);
-      res.status(400).json({ error: "Failed to save weight" });
+      const { week, day, exerciseName, weight } = req.body;
+      const userId = req.user!.id;
+      const [result] = await db
+        .insert(exerciseWeights)
+        .values({
+          userId,
+          week,
+          day,
+          exerciseName,
+          weight,
+        })
+        .onConflictDoUpdate({
+          target: [exerciseWeights.userId, exerciseWeights.week, exerciseWeights.day, exerciseWeights.exerciseName],
+          set: { weight },
+        })
+        .returning();
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   });
 
-  app.get("/api/weights/:week/:day/:exerciseName", async (req, res) => {
+  app.get("/api/weights/:week/:day/:exerciseName", requireAuth, async (req, res) => {
     try {
-      const week = parseInt(req.params.week);
-      const day = parseInt(req.params.day);
-      const exerciseName = decodeURIComponent(req.params.exerciseName);
-      
-      const weight = await storage.getExerciseWeight(week, day, exerciseName);
+      const { week, day, exerciseName } = req.params;
+      const userId = req.user!.id;
+      const [weight] = await db
+        .select()
+        .from(exerciseWeights)
+        .where(
+          and(
+            eq(exerciseWeights.userId, userId),
+            eq(exerciseWeights.week, parseInt(week)),
+            eq(exerciseWeights.day, parseInt(day)),
+            eq(exerciseWeights.exerciseName, exerciseName)
+          )
+        );
       res.json(weight || null);
-    } catch (error) {
-      console.error("Error getting weight:", error);
-      res.status(500).json({ error: "Failed to get weight" });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   });
 
-  app.get("/api/weights/history/:exerciseName", async (req, res) => {
+  app.get("/api/weights/history/:exerciseName", requireAuth, async (req, res) => {
     try {
-      const exerciseName = decodeURIComponent(req.params.exerciseName);
-      const history = await storage.getExerciseWeightHistory(exerciseName);
+      const { exerciseName } = req.params;
+      const userId = req.user!.id;
+      const history = await db
+        .select()
+        .from(exerciseWeights)
+        .where(
+          and(
+            eq(exerciseWeights.userId, userId),
+            eq(exerciseWeights.exerciseName, exerciseName)
+          )
+        );
       res.json(history);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error getting weight history:", error);
       res.status(500).json({ error: "Failed to get weight history" });
     }
   });
 
-  app.get("/api/exercise-stats", async (req, res) => {
+  app.get("/api/exercise-stats", requireAuth, async (req, res) => {
     try {
-      const stats = await storage.getExerciseStats();
+      const userId = req.user!.id;
+      const stats = await db
+        .select()
+        .from(exerciseWeights)
+        .where(eq(exerciseWeights.userId, userId));
       res.json(stats);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error getting exercise stats:", error);
       res.status(500).json({ error: "Failed to get exercise stats" });
     }

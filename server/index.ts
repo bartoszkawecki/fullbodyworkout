@@ -1,8 +1,27 @@
 import express, { type Request, Response, NextFunction } from "express";
+import session from "express-session";
+import passport from "passport";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import "./auth"; // Initialize passport strategies
 
 const app = express();
+
+// Session configuration
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "workout-tracker-secret-change-in-production",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 declare module 'http' {
   interface IncomingMessage {
