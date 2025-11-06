@@ -93,6 +93,7 @@ export default function Progress() {
                 <Card
                   key={exerciseName}
                   className="p-4 hover-elevate active-elevate-2 cursor-pointer transition-all"
+                  onClick={() => setLocation(`/progress/${encodeURIComponent(exerciseName)}`)}
                   data-testid={`card-exercise-${exerciseName.toLowerCase().replace(/\s+/g, "-")}`}
                 >
                   <div className="space-y-1">

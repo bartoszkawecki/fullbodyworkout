@@ -7,6 +7,7 @@ import Home from "@/pages/home";
 import Week from "@/pages/week";
 import Workout from "@/pages/workout";
 import Progress from "@/pages/progress";
+import ExerciseDetail from "@/pages/exercise-detail";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -14,6 +15,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/progress" component={Progress} />
+      <Route path="/progress/:exerciseName" component={ExerciseDetail} />
       <Route path="/week/:week" component={Week} />
       <Route path="/week/:week/day/:day" component={Workout} />
       <Route component={NotFound} />
