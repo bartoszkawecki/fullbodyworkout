@@ -124,20 +124,25 @@ export default function ExerciseDetail() {
                   <div>Workout</div>
                   <div>Weight</div>
                 </div>
-                {sortedHistoryDescending.map((record, index) => (
-                  <div
-                    key={index}
-                    className="grid grid-cols-2 gap-4 py-2 border-b last:border-b-0"
-                    data-testid={`row-history-${index}`}
-                  >
-                    <div data-testid={`text-workout-${index}`}>
-                      Week {record.week} Day {record.day}
+                {sortedHistoryDescending.map((record, index) => {
+                  const isBestRep = parseFloat(record.weight) === bestWeight;
+                  return (
+                    <div
+                      key={index}
+                      className={`grid grid-cols-2 gap-4 py-2 border-b last:border-b-0 ${
+                        isBestRep ? 'bg-primary text-primary-foreground rounded-md -mx-2 px-2' : ''
+                      }`}
+                      data-testid={`row-history-${index}`}
+                    >
+                      <div data-testid={`text-workout-${index}`}>
+                        Week {record.week} Day {record.day}
+                      </div>
+                      <div data-testid={`text-weight-${index}`}>
+                        {parseFloat(record.weight)} kg
+                      </div>
                     </div>
-                    <div data-testid={`text-weight-${index}`}>
-                      {parseFloat(record.weight)} kg
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </>
           )}
