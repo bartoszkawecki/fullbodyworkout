@@ -50,6 +50,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete("/api/weights", async (req, res) => {
+    try {
+      await storage.deleteAllWeights();
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting all weights:", error);
+      res.status(500).json({ error: "Failed to delete all weights" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

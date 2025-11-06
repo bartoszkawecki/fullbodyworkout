@@ -13,6 +13,7 @@ export interface IStorage {
   getExerciseWeight(week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined>;
   getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]>;
   getExerciseStats(): Promise<ExerciseStats[]>;
+  deleteAllWeights(): Promise<void>;
 }
 
 export class DbStorage implements IStorage {
@@ -79,6 +80,10 @@ export class DbStorage implements IStorage {
       recordCount: r.recordCount,
       bestWeight: r.bestWeight ? parseFloat(r.bestWeight) : null,
     }));
+  }
+
+  async deleteAllWeights(): Promise<void> {
+    await db.delete(exerciseWeights);
   }
 }
 

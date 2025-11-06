@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { setCompletionStatus } from "@/lib/storage";
+import { apiRequest } from "@/lib/queryClient";
 
 interface ExerciseStats {
   exerciseName: string;
@@ -34,9 +35,18 @@ export default function Progress() {
     stats?.map((s) => [s.exerciseName, s]) || []
   );
 
+  const resetMutation = useMutation({
+    mutationFn: async () => {
+      return apiRequest("DELETE", "/api/weights");
+    },
+    onSuccess: () => {
+      setCompletionStatus({});
+      window.location.reload();
+    },
+  });
+
   const handleReset = () => {
-    setCompletionStatus({});
-    window.location.reload();
+    resetMutation.mutate();
   };
 
   return (
@@ -63,13 +73,13 @@ export default function Progress() {
               <AlertDialogHeader>
                 <AlertDialogTitle>Reset All Progress?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This will clear all workout completion data. This action cannot be undone.
+                  This will clear all workout completion data and delete all weight records from the database. This action cannot be undone.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleReset}>
-                  Reset Progress
+                <AlertDialogAction onClick={handleReset} disabled={resetMutation.isPending}>
+                  {resetMutation.isPending ? "Resetting..." : "Reset Progress"}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
