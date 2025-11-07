@@ -3,7 +3,7 @@ services:
   - type: web
     name: fullbodyworkout
     runtime: node
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: NODE_ENV=production npm run start
     envVars:
       - key: DATABASE_URL
