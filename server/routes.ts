@@ -8,16 +8,19 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase environment variables');
-}
+// Don't crash at startup - let server start and report the issue via health check
+let supabaseAdmin: ReturnType<typeof createClient> | null = null;
 
-const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-});
+if (supabaseUrl && supabaseServiceKey) {
+  supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+} else {
+  console.error('WARNING: Missing Supabase environment variables. Registration endpoint will not work.');
+}
 
 const BETA_PASSWORD = 'Burgerek2137';
 
@@ -39,6 +42,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Registration endpoint
   app.post("/api/auth/register", async (req, res) => {
     try {
+      if (!supabaseAdmin) {
+        console.error('Registration called but Supabase admin client not initialized');
+        return res.status(500).json({ error: 'Registration service not configured. Please check server environment variables.' });
+      }
+
       const { username, password, betaPassword } = req.body;
 
       // Validate required fields

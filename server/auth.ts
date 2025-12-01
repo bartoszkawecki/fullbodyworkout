@@ -4,11 +4,14 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase environment variables. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY');
-}
+// Don't crash at startup - let server start and report the issue via health check
+let supabase: ReturnType<typeof createClient> | null = null;
 
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+if (supabaseUrl && supabaseServiceKey) {
+  supabase = createClient(supabaseUrl, supabaseServiceKey);
+} else {
+  console.error('WARNING: Missing Supabase environment variables. Auth endpoints will not work.');
+}
 
 export interface AuthRequest extends Request {
   userId?: string;
@@ -16,6 +19,11 @@ export interface AuthRequest extends Request {
 
 export async function requireAuth(req: AuthRequest, res: Response, next: NextFunction) {
   try {
+    if (!supabase) {
+      console.error('Auth called but Supabase client not initialized');
+      return res.status(500).json({ error: 'Authentication service not configured. Please check server environment variables.' });
+    }
+
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
