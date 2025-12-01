@@ -11,7 +11,7 @@ export default function Login() {
   const [, setLocation] = useLocation();
   const { signIn } = useAuth();
   const { toast } = useToast();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -19,6 +19,8 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
 
+    // Convert username to email format
+    const email = `${username.toLowerCase().replace(/\s+/g, '')}@workout.app`;
     const { error } = await signIn(email, password);
 
     if (error) {
@@ -48,13 +50,13 @@ export default function Login() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="username"
+                type="text"
+                placeholder="Your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 autoFocus
               />
