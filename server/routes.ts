@@ -22,6 +22,20 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
 const BETA_PASSWORD = 'Burgerek2137';
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint - no auth required
+  app.get("/api/health", (_req, res) => {
+    res.json({
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      version: "auth-enabled",
+      env: {
+        hasSupabaseUrl: !!process.env.SUPABASE_URL,
+        hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+        hasDatabaseUrl: !!process.env.DATABASE_URL
+      }
+    });
+  });
+
   // Registration endpoint
   app.post("/api/auth/register", async (req, res) => {
     try {
