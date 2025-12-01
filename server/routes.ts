@@ -91,12 +91,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/weights", requireAuth, async (req: AuthRequest, res) => {
     try {
       const userId = req.userId!;
+      console.log("POST /api/weights - userId:", userId);
+      console.log("POST /api/weights - body:", JSON.stringify(req.body));
+
       const data = insertExerciseWeightSchema.parse(req.body);
+      console.log("POST /api/weights - parsed data:", JSON.stringify(data));
+
       const saved = await storage.saveExerciseWeight(userId, data);
+      console.log("POST /api/weights - saved:", JSON.stringify(saved));
+
       res.json(saved);
     } catch (error) {
-      console.error("Error saving weight:", error);
-      res.status(400).json({ error: "Failed to save weight" });
+      console.error("Error saving weight - Full error:", error);
+      if (error instanceof Error) {
+        console.error("Error message:", error.message);
+        console.error("Error stack:", error.stack);
+      }
+      res.status(400).json({
+        error: "Failed to save weight",
+        details: error instanceof Error ? error.message : String(error)
+      });
     }
   });
 
