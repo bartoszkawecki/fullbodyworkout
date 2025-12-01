@@ -12,7 +12,7 @@ interface DayCardProps {
 
 export function DayCard({ week, day, onClick }: DayCardProps) {
   const { data: completions = [] } = useQuery<Completion[]>({
-    queryKey: ["/api/completions"],
+    queryKey: ["completions"],
     queryFn: fetchCompletions,
     staleTime: 30000,
     placeholderData: (previousData) => previousData,

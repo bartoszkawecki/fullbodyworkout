@@ -1,14 +1,11 @@
 import { CompletionStatus, type Completion } from "@shared/schema";
 import { queryClient } from "./queryClient";
+import { getCompletions, toggleDayCompletion as toggleCompletion } from "./supabaseStorage";
 
 let completionsCache: Completion[] | null = null;
 
 export async function fetchCompletions(): Promise<Completion[]> {
-  const response = await fetch("/api/completions");
-  if (!response.ok) {
-    throw new Error("Failed to fetch completions");
-  }
-  const data = await response.json();
+  const data = await getCompletions();
   completionsCache = data;
   return data;
 }
@@ -39,19 +36,8 @@ export function isDayCompleted(week: number, day: number): boolean {
 }
 
 export async function toggleDayCompletion(week: number, day: number): Promise<void> {
-  const response = await fetch("/api/completions/toggle", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ week, day }),
-  });
-  
-  if (!response.ok) {
-    throw new Error("Failed to toggle completion");
-  }
-  
-  queryClient.invalidateQueries({ queryKey: ["/api/completions"] });
+  await toggleCompletion(week, day);
+  queryClient.invalidateQueries({ queryKey: ["completions"] });
 }
 
 export function getCompletedDaysForWeek(week: number): number {

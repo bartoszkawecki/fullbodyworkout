@@ -15,7 +15,7 @@ export default function Week() {
   const blockName = getBlockForWeek(week);
   
   useQuery<Completion[]>({
-    queryKey: ["/api/completions"],
+    queryKey: ["completions"],
     queryFn: fetchCompletions,
     staleTime: 30000,
     placeholderData: (previousData) => previousData,

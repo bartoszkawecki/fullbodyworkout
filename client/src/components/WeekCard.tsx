@@ -14,7 +14,7 @@ interface WeekCardProps {
 
 export function WeekCard({ week, totalDays, onClick }: WeekCardProps) {
   const { data: completions = [] } = useQuery<Completion[]>({
-    queryKey: ["/api/completions"],
+    queryKey: ["completions"],
     queryFn: fetchCompletions,
     staleTime: 30000,
     placeholderData: (previousData) => previousData,
