@@ -121,11 +121,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const day = parseInt(req.params.day);
       const exerciseName = decodeURIComponent(req.params.exerciseName);
 
+      console.log(`GET /api/weights/${week}/${day}/${exerciseName} - userId:`, userId);
+
       const weight = await storage.getExerciseWeight(userId, week, day, exerciseName);
       res.json(weight || null);
     } catch (error) {
-      console.error("Error getting weight:", error);
-      res.status(500).json({ error: "Failed to get weight" });
+      console.error("Error getting weight - Full error:", error);
+      res.status(500).json({
+        error: "Failed to get weight",
+        details: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
     }
   });
 
@@ -181,11 +187,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/completions", requireAuth, async (req: AuthRequest, res) => {
     try {
       const userId = req.userId!;
+      console.log("GET /api/completions - userId:", userId);
+
       const completions = await storage.getCompletions(userId);
+      console.log("GET /api/completions - found", completions.length, "completions");
+
       res.json(completions);
     } catch (error) {
-      console.error("Error getting completions:", error);
-      res.status(500).json({ error: "Failed to get completions" });
+      console.error("Error getting completions - Full error:", error);
+      res.status(500).json({
+        error: "Failed to get completions",
+        details: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
     }
   });
 
