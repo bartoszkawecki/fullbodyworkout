@@ -1,17 +1,13 @@
 import { useState, type FormEvent } from 'react';
 import { useLocation } from 'wouter';
-import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 
-const BETA_PASSWORD = 'Burgerek2137';
-
 export default function Register() {
   const [, setLocation] = useLocation();
-  const { signUp } = useAuth();
   const { toast } = useToast();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,16 +17,6 @@ export default function Register() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    // Validate beta password
-    if (betaPassword !== BETA_PASSWORD) {
-      toast({
-        title: 'Invalid beta password',
-        description: 'Please enter the correct beta password to register',
-        variant: 'destructive',
-      });
-      return;
-    }
 
     // Validate password match
     if (password !== confirmPassword) {
@@ -42,36 +28,45 @@ export default function Register() {
       return;
     }
 
-    // Validate password strength
-    if (password.length < 6) {
-      toast({
-        title: 'Password too short',
-        description: 'Password must be at least 6 characters',
-        variant: 'destructive',
-      });
-      return;
-    }
-
     setLoading(true);
 
-    // Create email from username
-    const email = `${username.toLowerCase().replace(/\s+/g, '')}@workout.app`;
-
-    const { error } = await signUp(email, password, username);
-
-    if (error) {
-      toast({
-        title: 'Registration failed',
-        description: error.message,
-        variant: 'destructive',
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          betaPassword,
+        }),
       });
-      setLoading(false);
-    } else {
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast({
+          title: 'Registration failed',
+          description: data.error || 'Failed to create account',
+          variant: 'destructive',
+        });
+        setLoading(false);
+        return;
+      }
+
       toast({
         title: 'Account created!',
         description: 'You can now sign in with your credentials',
       });
       setLocation('/login');
+    } catch (error) {
+      toast({
+        title: 'Registration failed',
+        description: 'An unexpected error occurred',
+        variant: 'destructive',
+      });
+      setLoading(false);
     }
   };
 

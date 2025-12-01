@@ -3,8 +3,69 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertExerciseWeightSchema } from "@shared/schema";
 import { requireAuth, type AuthRequest } from "./auth";
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  throw new Error('Missing Supabase environment variables');
+}
+
+const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
+});
+
+const BETA_PASSWORD = 'Burgerek2137';
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Registration endpoint
+  app.post("/api/auth/register", async (req, res) => {
+    try {
+      const { username, password, betaPassword } = req.body;
+
+      // Validate required fields
+      if (!username || !password || !betaPassword) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      // Validate beta password
+      if (betaPassword !== BETA_PASSWORD) {
+        return res.status(400).json({ error: "Invalid beta password" });
+      }
+
+      // Validate password strength
+      if (password.length < 6) {
+        return res.status(400).json({ error: "Password must be at least 6 characters" });
+      }
+
+      // Create email from username
+      const email = `${username.toLowerCase().replace(/\s+/g, '')}@workout.app`;
+
+      // Create user with Supabase Admin API (bypasses email confirmation)
+      const { data, error } = await supabaseAdmin.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true, // Auto-confirm email
+        user_metadata: {
+          username
+        }
+      });
+
+      if (error) {
+        console.error("Registration error:", error);
+        return res.status(400).json({ error: error.message });
+      }
+
+      res.json({ success: true, user: data.user });
+    } catch (error) {
+      console.error("Registration error:", error);
+      res.status(500).json({ error: "Failed to register user" });
+    }
+  });
   app.post("/api/weights", requireAuth, async (req: AuthRequest, res) => {
     try {
       const userId = req.userId!;
