@@ -1,5 +1,5 @@
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import * as schema from "@shared/schema";
 
 // Don't crash at startup - let server start and report the issue via health check
@@ -8,10 +8,9 @@ if (!process.env.DATABASE_URL) {
 }
 
 // Only create connection if DATABASE_URL is set, otherwise use a dummy placeholder
-const sql = process.env.DATABASE_URL
-  ? neon(process.env.DATABASE_URL)
-  : (() => {
-      throw new Error("DATABASE_URL not configured");
-    }) as any;
+const connectionString = process.env.DATABASE_URL || "";
+const client = connectionString
+  ? postgres(connectionString)
+  : null;
 
-export const db = drizzle(sql, { schema });
+export const db = client ? drizzle(client, { schema }) : null as any;
