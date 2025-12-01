@@ -7,5 +7,11 @@ if (!process.env.DATABASE_URL) {
   console.error("WARNING: DATABASE_URL environment variable is not set. Database operations will fail.");
 }
 
-const sql = neon(process.env.DATABASE_URL || 'postgresql://placeholder');
+// Only create connection if DATABASE_URL is set, otherwise use a dummy placeholder
+const sql = process.env.DATABASE_URL
+  ? neon(process.env.DATABASE_URL)
+  : (() => {
+      throw new Error("DATABASE_URL not configured");
+    }) as any;
+
 export const db = drizzle(sql, { schema });
