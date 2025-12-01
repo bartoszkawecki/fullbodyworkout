@@ -9,27 +9,28 @@ export interface ExerciseStats {
 }
 
 export interface IStorage {
-  saveExerciseWeight(data: InsertExerciseWeight): Promise<ExerciseWeight>;
-  getExerciseWeight(week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined>;
-  getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]>;
-  getExerciseStats(): Promise<ExerciseStats[]>;
-  deleteAllWeights(): Promise<void>;
-  deleteWeight(id: number): Promise<void>;
-  getCompletions(): Promise<Completion[]>;
-  toggleDayCompletion(week: number, day: number): Promise<boolean>;
-  deleteAllCompletions(): Promise<void>;
+  saveExerciseWeight(userId: string, data: InsertExerciseWeight): Promise<ExerciseWeight>;
+  getExerciseWeight(userId: string, week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined>;
+  getExerciseWeightHistory(userId: string, exerciseName: string): Promise<ExerciseWeight[]>;
+  getExerciseStats(userId: string): Promise<ExerciseStats[]>;
+  deleteAllWeights(userId: string): Promise<void>;
+  deleteWeight(userId: string, id: number): Promise<void>;
+  getCompletions(userId: string): Promise<Completion[]>;
+  toggleDayCompletion(userId: string, week: number, day: number): Promise<boolean>;
+  deleteAllCompletions(userId: string): Promise<void>;
 }
 
 export class DbStorage implements IStorage {
-  async saveExerciseWeight(data: InsertExerciseWeight): Promise<ExerciseWeight> {
-    const existing = await this.getExerciseWeight(data.week, data.day, data.exerciseName);
-    
+  async saveExerciseWeight(userId: string, data: InsertExerciseWeight): Promise<ExerciseWeight> {
+    const existing = await this.getExerciseWeight(userId, data.week, data.day, data.exerciseName);
+
     if (existing) {
       const [updated] = await db
         .update(exerciseWeights)
         .set({ weight: data.weight })
         .where(
           and(
+            eq(exerciseWeights.userId, userId),
             eq(exerciseWeights.week, data.week),
             eq(exerciseWeights.day, data.day),
             eq(exerciseWeights.exerciseName, data.exerciseName)
@@ -40,18 +41,19 @@ export class DbStorage implements IStorage {
     } else {
       const [created] = await db
         .insert(exerciseWeights)
-        .values(data)
+        .values({ ...data, userId })
         .returning();
       return created;
     }
   }
 
-  async getExerciseWeight(week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined> {
+  async getExerciseWeight(userId: string, week: number, day: number, exerciseName: string): Promise<ExerciseWeight | undefined> {
     const [weight] = await db
       .select()
       .from(exerciseWeights)
       .where(
         and(
+          eq(exerciseWeights.userId, userId),
           eq(exerciseWeights.week, week),
           eq(exerciseWeights.day, day),
           eq(exerciseWeights.exerciseName, exerciseName)
@@ -60,15 +62,20 @@ export class DbStorage implements IStorage {
     return weight;
   }
 
-  async getExerciseWeightHistory(exerciseName: string): Promise<ExerciseWeight[]> {
+  async getExerciseWeightHistory(userId: string, exerciseName: string): Promise<ExerciseWeight[]> {
     return db
       .select()
       .from(exerciseWeights)
-      .where(eq(exerciseWeights.exerciseName, exerciseName))
+      .where(
+        and(
+          eq(exerciseWeights.userId, userId),
+          eq(exerciseWeights.exerciseName, exerciseName)
+        )
+      )
       .orderBy(exerciseWeights.week, exerciseWeights.day);
   }
 
-  async getExerciseStats(): Promise<ExerciseStats[]> {
+  async getExerciseStats(userId: string): Promise<ExerciseStats[]> {
     const results = await db
       .select({
         exerciseName: exerciseWeights.exerciseName,
@@ -76,6 +83,7 @@ export class DbStorage implements IStorage {
         bestWeight: sql<string>`max(${exerciseWeights.weight})`,
       })
       .from(exerciseWeights)
+      .where(eq(exerciseWeights.userId, userId))
       .groupBy(exerciseWeights.exerciseName)
       .orderBy(exerciseWeights.exerciseName);
 
@@ -86,37 +94,54 @@ export class DbStorage implements IStorage {
     }));
   }
 
-  async deleteAllWeights(): Promise<void> {
-    await db.delete(exerciseWeights);
+  async deleteAllWeights(userId: string): Promise<void> {
+    await db.delete(exerciseWeights).where(eq(exerciseWeights.userId, userId));
   }
 
-  async deleteWeight(id: number): Promise<void> {
-    await db.delete(exerciseWeights).where(eq(exerciseWeights.id, id));
+  async deleteWeight(userId: string, id: number): Promise<void> {
+    await db.delete(exerciseWeights).where(
+      and(
+        eq(exerciseWeights.userId, userId),
+        eq(exerciseWeights.id, id)
+      )
+    );
   }
 
-  async getCompletions(): Promise<Completion[]> {
-    return db.select().from(completions);
+  async getCompletions(userId: string): Promise<Completion[]> {
+    return db.select().from(completions).where(eq(completions.userId, userId));
   }
 
-  async toggleDayCompletion(week: number, day: number): Promise<boolean> {
+  async toggleDayCompletion(userId: string, week: number, day: number): Promise<boolean> {
     const [existing] = await db
       .select()
       .from(completions)
-      .where(and(eq(completions.week, week), eq(completions.day, day)));
+      .where(
+        and(
+          eq(completions.userId, userId),
+          eq(completions.week, week),
+          eq(completions.day, day)
+        )
+      );
 
     if (existing) {
       await db
         .delete(completions)
-        .where(and(eq(completions.week, week), eq(completions.day, day)));
+        .where(
+          and(
+            eq(completions.userId, userId),
+            eq(completions.week, week),
+            eq(completions.day, day)
+          )
+        );
       return false;
     } else {
-      await db.insert(completions).values({ week, day });
+      await db.insert(completions).values({ userId, week, day });
       return true;
     }
   }
 
-  async deleteAllCompletions(): Promise<void> {
-    await db.delete(completions);
+  async deleteAllCompletions(userId: string): Promise<void> {
+    await db.delete(completions).where(eq(completions.userId, userId));
   }
 }
 

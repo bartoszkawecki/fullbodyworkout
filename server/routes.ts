@@ -2,12 +2,14 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertExerciseWeightSchema } from "@shared/schema";
+import { requireAuth, type AuthRequest } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  app.post("/api/weights", async (req, res) => {
+  app.post("/api/weights", requireAuth, async (req: AuthRequest, res) => {
     try {
+      const userId = req.userId!;
       const data = insertExerciseWeightSchema.parse(req.body);
-      const saved = await storage.saveExerciseWeight(data);
+      const saved = await storage.saveExerciseWeight(userId, data);
       res.json(saved);
     } catch (error) {
       console.error("Error saving weight:", error);
@@ -15,13 +17,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/weights/:week/:day/:exerciseName", async (req, res) => {
+  app.get("/api/weights/:week/:day/:exerciseName", requireAuth, async (req: AuthRequest, res) => {
     try {
+      const userId = req.userId!;
       const week = parseInt(req.params.week);
       const day = parseInt(req.params.day);
       const exerciseName = decodeURIComponent(req.params.exerciseName);
-      
-      const weight = await storage.getExerciseWeight(week, day, exerciseName);
+
+      const weight = await storage.getExerciseWeight(userId, week, day, exerciseName);
       res.json(weight || null);
     } catch (error) {
       console.error("Error getting weight:", error);
@@ -29,10 +32,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/weights/history/:exerciseName", async (req, res) => {
+  app.get("/api/weights/history/:exerciseName", requireAuth, async (req: AuthRequest, res) => {
     try {
+      const userId = req.userId!;
       const exerciseName = decodeURIComponent(req.params.exerciseName);
-      const history = await storage.getExerciseWeightHistory(exerciseName);
+      const history = await storage.getExerciseWeightHistory(userId, exerciseName);
       res.json(history);
     } catch (error) {
       console.error("Error getting weight history:", error);
@@ -40,9 +44,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/exercise-stats", async (req, res) => {
+  app.get("/api/exercise-stats", requireAuth, async (req: AuthRequest, res) => {
     try {
-      const stats = await storage.getExerciseStats();
+      const userId = req.userId!;
+      const stats = await storage.getExerciseStats(userId);
       res.json(stats);
     } catch (error) {
       console.error("Error getting exercise stats:", error);
@@ -50,9 +55,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/weights", async (req, res) => {
+  app.delete("/api/weights", requireAuth, async (req: AuthRequest, res) => {
     try {
-      await storage.deleteAllWeights();
+      const userId = req.userId!;
+      await storage.deleteAllWeights(userId);
       res.json({ success: true });
     } catch (error) {
       console.error("Error deleting all weights:", error);
@@ -60,13 +66,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/weights/:id", async (req, res) => {
+  app.delete("/api/weights/:id", requireAuth, async (req: AuthRequest, res) => {
     try {
+      const userId = req.userId!;
       const id = parseInt(req.params.id, 10);
       if (Number.isNaN(id) || id <= 0) {
         return res.status(400).json({ error: "Invalid weight ID" });
       }
-      await storage.deleteWeight(id);
+      await storage.deleteWeight(userId, id);
       res.json({ success: true });
     } catch (error) {
       console.error("Error deleting weight:", error);
@@ -74,9 +81,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/completions", async (req, res) => {
+  app.get("/api/completions", requireAuth, async (req: AuthRequest, res) => {
     try {
-      const completions = await storage.getCompletions();
+      const userId = req.userId!;
+      const completions = await storage.getCompletions(userId);
       res.json(completions);
     } catch (error) {
       console.error("Error getting completions:", error);
@@ -84,13 +92,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/completions/toggle", async (req, res) => {
+  app.post("/api/completions/toggle", requireAuth, async (req: AuthRequest, res) => {
     try {
+      const userId = req.userId!;
       const { week, day } = req.body;
       if (typeof week !== "number" || typeof day !== "number") {
         return res.status(400).json({ error: "Invalid week or day" });
       }
-      const isCompleted = await storage.toggleDayCompletion(week, day);
+      const isCompleted = await storage.toggleDayCompletion(userId, week, day);
       res.json({ isCompleted });
     } catch (error) {
       console.error("Error toggling completion:", error);
@@ -98,9 +107,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/completions", async (req, res) => {
+  app.delete("/api/completions", requireAuth, async (req: AuthRequest, res) => {
     try {
-      await storage.deleteAllCompletions();
+      const userId = req.userId!;
+      await storage.deleteAllCompletions(userId);
       res.json({ success: true });
     } catch (error) {
       console.error("Error deleting all completions:", error);
