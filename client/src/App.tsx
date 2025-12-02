@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PasswordProtection } from "@/components/PasswordProtection";
 import { ThemeProvider } from "@/lib/theme";
+import { FontProvider } from "@/lib/fonts";
 import Home from "@/pages/home";
 import Week from "@/pages/week";
 import Workout from "@/pages/workout";
@@ -31,12 +32,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <TooltipProvider>
-          <Toaster />
-          <PasswordProtection>
-            <Router />
-          </PasswordProtection>
-        </TooltipProvider>
+        <FontProvider>
+          <TooltipProvider>
+            <Toaster />
+            <PasswordProtection>
+              <Router />
+            </PasswordProtection>
+          </TooltipProvider>
+        </FontProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

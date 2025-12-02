@@ -1,12 +1,14 @@
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, Download, Palette, Check } from "lucide-react";
+import { ArrowLeft, Download, Palette, Check, Type } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { useTheme, allThemes } from "@/lib/theme";
+import { useFont, allFonts } from "@/lib/fonts";
 
 export default function Settings() {
   const [, setLocation] = useLocation();
   const { themeId, setTheme } = useTheme();
+  const { fontId, setFont } = useFont();
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,6 +79,59 @@ export default function Settings() {
                         <h3 className="text-lg font-semibold">{theme.name}</h3>
                         <p className="text-sm text-muted-foreground">
                           {theme.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {isActive && (
+                      <Check className="h-6 w-6 text-primary flex-shrink-0" />
+                    )}
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Font Section */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Type className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Font</h2>
+          </div>
+
+          <div className="grid gap-3">
+            {allFonts.map((font) => {
+              const isActive = fontId === font.id;
+
+              return (
+                <Card
+                  key={font.id}
+                  className={`p-5 hover-elevate active-elevate-2 cursor-pointer transition-all border-2 ${
+                    isActive ? 'border-primary' : 'border-transparent'
+                  }`}
+                  onClick={() => setFont(font.id)}
+                  data-testid={`button-font-${font.id}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      {/* Font preview */}
+                      <div
+                        className="text-2xl font-semibold"
+                        style={{ fontFamily: font.fontFamily }}
+                      >
+                        Aa
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <h3
+                          className="text-lg font-semibold"
+                          style={{ fontFamily: font.fontFamily }}
+                        >
+                          {font.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground truncate">
+                          {font.description}
                         </p>
                       </div>
                     </div>
