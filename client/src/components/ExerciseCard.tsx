@@ -38,16 +38,19 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
 
   useEffect(() => {
     if (existingWeight && weight === "") {
-      setWeight(existingWeight.toString());
+      // Display weight with comma as decimal separator
+      setWeight(existingWeight.toString().replace('.', ','));
     }
   }, [existingWeight, weight]);
 
   const saveMutation = useMutation({
     mutationFn: async () => {
-      if (!weight || parseFloat(weight) <= 0) {
+      // Convert comma to dot for parsing
+      const normalizedWeight = weight.replace(',', '.');
+      if (!normalizedWeight || parseFloat(normalizedWeight) <= 0) {
         throw new Error("Please enter a valid weight");
       }
-      const numericWeight = parseFloat(weight);
+      const numericWeight = parseFloat(normalizedWeight);
       return saveExerciseWeight({
         week,
         day,
@@ -71,7 +74,9 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
   });
 
   const handleSave = () => {
-    if (weight && parseFloat(weight) > 0 && !isSavingRef.current && !showSuccess) {
+    // Convert comma to dot for validation
+    const normalizedWeight = weight.replace(',', '.');
+    if (normalizedWeight && parseFloat(normalizedWeight) > 0 && !isSavingRef.current && !showSuccess) {
       isSavingRef.current = true;
       saveMutation.mutate();
     }
@@ -139,13 +144,21 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
           <div className="flex gap-2 items-center">
             <div className="flex-1 relative">
               <Input
-                type="number"
+                type="text"
                 inputMode="decimal"
-                step="0.5"
+                pattern="[0-9]*[,]?[0-9]*"
                 placeholder="Add Weight"
                 className="pr-12"
                 value={weight}
-                onChange={(e) => setWeight(e.target.value)}
+                onChange={(e) => {
+                  // Only allow numbers and comma
+                  const value = e.target.value.replace(/[^0-9,]/g, '');
+                  // Only allow one comma
+                  const commaCount = (value.match(/,/g) || []).length;
+                  if (commaCount <= 1) {
+                    setWeight(value);
+                  }
+                }}
                 onBlur={handleBlur}
                 data-testid="input-weight"
               />
@@ -164,7 +177,7 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
           </div>
           {bestRep !== null && (
             <p className="text-sm text-muted-foreground mt-2" data-testid="text-best-rep">
-              Best rep: {bestRep.toFixed(2)} kg
+              Best rep: {bestRep.toFixed(2).replace('.', ',')} kg
             </p>
           )}
         </div>

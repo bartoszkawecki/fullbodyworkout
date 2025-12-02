@@ -109,7 +109,7 @@ export default function Progress() {
                         Number of records: {recordCount}
                       </span>
                       <span data-testid={`text-best-weight-${exerciseName.toLowerCase().replace(/\s+/g, "-")}`}>
-                        Best rep: {bestWeight} kg
+                        Best rep: {bestWeight.toFixed(2).replace('.', ',')} kg
                       </span>
                     </div>
                   </div>

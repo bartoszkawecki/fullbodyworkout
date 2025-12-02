@@ -74,7 +74,7 @@ export default function ExerciseDetail() {
               Number of records: {recordCount}
             </span>
             <span data-testid="text-detail-best-weight">
-              Best rep: {bestWeight} kg
+              Best rep: {bestWeight.toFixed(2).replace('.', ',')} kg
             </span>
           </div>
         </Card>
@@ -116,7 +116,7 @@ export default function ExerciseDetail() {
                         const item = chartData.find(d => d.name === label);
                         return item?.fullName || label;
                       }}
-                      formatter={(value: number) => [`${value} kg`, 'Weight']}
+                      formatter={(value: number) => [`${value.toFixed(2).replace('.', ',')} kg`, 'Weight']}
                     />
                     <Line 
                       type="monotone" 
@@ -150,7 +150,7 @@ export default function ExerciseDetail() {
                         Week {record.week} Day {record.day}
                       </div>
                       <div data-testid={`text-weight-${index}`}>
-                        {parseFloat(record.weight)} kg
+                        {parseFloat(record.weight).toFixed(2).replace('.', ',')} kg
                       </div>
                       <Button
                         variant="ghost"
