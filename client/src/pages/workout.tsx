@@ -181,6 +181,30 @@ export default function Workout() {
           className="relative overflow-hidden"
           data-testid="exercise-swipe-container"
         >
+          {/* Left Arrow Navigation - Desktop */}
+          {currentExercise > 0 && (
+            <button
+              onClick={handlePrevious}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 items-center justify-center w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border-2 border-border hover:bg-background hover:border-primary transition-all shadow-lg hover:shadow-xl hover:scale-110"
+              aria-label="Previous exercise"
+              data-testid="button-previous-exercise"
+            >
+              <ArrowLeft className="h-5 w-5 text-foreground" />
+            </button>
+          )}
+
+          {/* Right Arrow Navigation - Desktop */}
+          {currentExercise < workout.exercises.length - 1 && (
+            <button
+              onClick={handleNext}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 items-center justify-center w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border-2 border-border hover:bg-background hover:border-primary transition-all shadow-lg hover:shadow-xl hover:scale-110"
+              aria-label="Next exercise"
+              data-testid="button-next-exercise-arrow"
+            >
+              <ArrowRight className="h-5 w-5 text-foreground" />
+            </button>
+          )}
+
           <div
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
