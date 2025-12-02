@@ -1,0 +1,89 @@
+# Render Blueprint for Full Body Workout App
+# This file enables Infrastructure as Code deployment on Render
+#
+# To use this file:
+# 1. Push this file to your repository
+# 2. Go to Render Dashboard → "New" → "Blueprint"
+# 3. Connect your repository
+# 4. Render will automatically detect this file and set up your services
+#
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # Staging Static Site
+  - type: web
+    name: fullbodyworkout-staging
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    pullRequestPreviewsEnabled: false
+
+    # Branch configuration
+    branch: claude/staging-render-setup-017xZP8Updzg7tmxwuMrPPge
+
+    # Environment variables (set these in Render Dashboard)
+    envVars:
+      - key: VITE_SUPABASE_URL
+        sync: false  # Must be set manually in Render Dashboard
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false  # Must be set manually in Render Dashboard
+
+    # Headers for security and caching
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+
+    # Routes configuration for SPA
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+# Production Static Site (uncomment when ready for production)
+# - type: web
+#   name: fullbodyworkout-production
+#   runtime: static
+#   buildCommand: npm install && npm run build
+#   staticPublishPath: ./dist
+#   pullRequestPreviewsEnabled: false
+#
+#   # Branch configuration - use your main/master branch
+#   branch: main
+#
+#   # Environment variables (set these in Render Dashboard)
+#   envVars:
+#     - key: VITE_SUPABASE_URL
+#       sync: false
+#     - key: VITE_SUPABASE_ANON_KEY
+#       sync: false
+#
+#   # Headers for security and caching
+#   headers:
+#     - path: /*
+#       name: X-Frame-Options
+#       value: SAMEORIGIN
+#     - path: /*
+#       name: X-Content-Type-Options
+#       value: nosniff
+#     - path: /*
+#       name: Referrer-Policy
+#       value: strict-origin-when-cross-origin
+#     - path: /assets/*
+#       name: Cache-Control
+#       value: public, max-age=31536000, immutable
+#
+#   # Routes configuration for SPA
+#   routes:
+#     - type: rewrite
+#       source: /*
+#       destination: /index.html
