@@ -332,3 +332,85 @@
     overscroll-behavior: none;
   }
 }
+
+/* ==========================================================================
+   PUSH THEME ENHANCEMENTS
+   ========================================================================== */
+
+/* Add neon glow effects for PUSH theme */
+[data-theme="push"] {
+  /* Enhance cards with subtle neon glow */
+  .border:not(.no-glow) {
+    box-shadow: 0 0 10px -2px hsl(190 100% 50% / 0.1);
+  }
+
+  /* Primary buttons get neon glow */
+  .bg-primary {
+    box-shadow: 0 0 15px -3px hsl(190 100% 50% / 0.4),
+                0 4px 8px -2px hsl(0 0% 0% / 0.5);
+  }
+
+  .bg-primary:hover {
+    box-shadow: 0 0 20px -2px hsl(190 100% 50% / 0.6),
+                0 6px 12px -2px hsl(0 0% 0% / 0.6);
+  }
+
+  /* Accent elements (like checkmarks, icons) */
+  .text-primary {
+    text-shadow: 0 0 10px hsl(190 100% 50% / 0.5);
+  }
+
+  /* Ring/focus states get stronger glow */
+  .ring-ring {
+    box-shadow: 0 0 0 2px hsl(190 100% 50% / 0.8),
+                0 0 15px hsl(190 100% 50% / 0.4);
+  }
+
+  /* Input focus glow */
+  input:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 0 2px hsl(190 100% 50% / 0.5),
+                0 0 20px hsl(190 100% 50% / 0.2);
+  }
+
+  /* Card hover state enhanced glow */
+  .hover-elevate:hover {
+    box-shadow: 0 0 20px -5px hsl(190 100% 50% / 0.15),
+                0 4px 12px -2px hsl(0 0% 0% / 0.4);
+  }
+
+  /* Stronger elevation for active states */
+  .active-elevate-2:active {
+    box-shadow: 0 0 25px -5px hsl(190 100% 50% / 0.2),
+                0 6px 16px -2px hsl(0 0% 0% / 0.5);
+  }
+
+  /* Bold typography */
+  h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Slightly bolder body text for better readability */
+  body {
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Enhance button text weight */
+  button {
+    font-weight: 600;
+  }
+}
+
+/* Default theme - ensure clean look */
+[data-theme="default"] {
+  /* Remove any glow effects */
+  .bg-primary {
+    box-shadow: none;
+  }
+
+  /* Standard subtle shadows only */
+  .hover-elevate:hover {
+    box-shadow: none;
+  }
+}
