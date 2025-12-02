@@ -5,8 +5,13 @@ import { Input } from "@/components/ui/input";
 import { WorkoutExercise } from "@shared/workoutData";
 import { Dumbbell } from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import type { ExerciseWeight } from "@shared/schema";
+import { queryClient } from "@/lib/queryClient";
+import {
+  getExerciseWeight,
+  getExerciseWeightHistory,
+  saveExerciseWeight
+} from "@/lib/storage";
+import type { ExerciseWeight } from "@/lib/supabase";
 
 interface ExerciseCardProps {
   exercise: WorkoutExercise;
@@ -21,17 +26,19 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
   const [showSuccess, setShowSuccess] = useState(false);
   const isSavingRef = useRef(false);
 
-  const { data: existingWeight } = useQuery<ExerciseWeight | null>({
-    queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`],
+  const { data: existingWeight } = useQuery<number | null>({
+    queryKey: ['weights', week, day, exercise.name],
+    queryFn: () => getExerciseWeight(week, day, exercise.name),
   });
 
   const { data: weightHistory = [] } = useQuery<ExerciseWeight[]>({
-    queryKey: [`/api/weights/history/${encodeURIComponent(exercise.name)}`],
+    queryKey: ['weights', 'history', exercise.name],
+    queryFn: () => getExerciseWeightHistory(exercise.name),
   });
 
   useEffect(() => {
-    if (existingWeight?.weight && weight === "") {
-      setWeight(existingWeight.weight);
+    if (existingWeight && weight === "") {
+      setWeight(existingWeight.toString());
     }
   }, [existingWeight, weight]);
 
@@ -40,8 +47,8 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
       if (!weight || parseFloat(weight) <= 0) {
         throw new Error("Please enter a valid weight");
       }
-      const numericWeight = parseFloat(weight).toFixed(2);
-      return apiRequest("POST", "/api/weights", {
+      const numericWeight = parseFloat(weight);
+      return saveExerciseWeight({
         week,
         day,
         exerciseName: exercise.name,
@@ -51,11 +58,11 @@ export function ExerciseCard({ exercise, exerciseNumber, totalExercises, week, d
     onSuccess: () => {
       isSavingRef.current = false;
       setShowSuccess(true);
-      queryClient.invalidateQueries({ queryKey: ["/api/exercise-stats"] });
-      queryClient.invalidateQueries({ queryKey: [`/api/weights/history/${encodeURIComponent(exercise.name)}`] });
+      queryClient.invalidateQueries({ queryKey: ['exercise-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['weights', 'history', exercise.name] });
       setTimeout(() => {
         setShowSuccess(false);
-        queryClient.invalidateQueries({ queryKey: [`/api/weights/${week}/${day}/${encodeURIComponent(exercise.name)}`] });
+        queryClient.invalidateQueries({ queryKey: ['weights', week, day, exercise.name] });
       }, 2000);
     },
     onError: () => {

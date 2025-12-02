@@ -15,19 +15,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { apiRequest } from "@/lib/queryClient";
-
-interface ExerciseStats {
-  exerciseName: string;
-  recordCount: number;
-  bestWeight: number | null;
-}
+import { getExerciseStats, deleteAllWeights, deleteAllCompletions, type ExerciseStats } from "@/lib/storage";
 
 export default function Progress() {
   const [, setLocation] = useLocation();
 
   const { data: stats, isLoading } = useQuery<ExerciseStats[]>({
-    queryKey: ["/api/exercise-stats"],
+    queryKey: ['exercise-stats'],
+    queryFn: getExerciseStats,
   });
 
   const statsMap = new Map(
@@ -36,8 +31,8 @@ export default function Progress() {
 
   const resetMutation = useMutation({
     mutationFn: async () => {
-      await apiRequest("DELETE", "/api/weights");
-      await apiRequest("DELETE", "/api/completions");
+      await deleteAllWeights();
+      await deleteAllCompletions();
     },
     onSuccess: () => {
       window.location.reload();

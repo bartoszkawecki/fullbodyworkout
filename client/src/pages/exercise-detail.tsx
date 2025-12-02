@@ -3,9 +3,10 @@ import { Card } from "@/components/ui/card";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation, useParams } from "wouter";
-import type { ExerciseWeight } from "@shared/schema";
+import type { ExerciseWeight } from "@/lib/supabase";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/lib/queryClient";
+import { getExerciseWeightHistory, deleteWeight } from "@/lib/storage";
 
 export default function ExerciseDetail() {
   const [, setLocation] = useLocation();
@@ -13,16 +14,15 @@ export default function ExerciseDetail() {
   const exerciseName = decodeURIComponent(params.exerciseName || "");
 
   const { data: history, isLoading } = useQuery<ExerciseWeight[]>({
-    queryKey: [`/api/weights/history/${encodeURIComponent(exerciseName)}`],
+    queryKey: ['weights', 'history', exerciseName],
+    queryFn: () => getExerciseWeightHistory(exerciseName),
   });
 
   const deleteMutation = useMutation({
-    mutationFn: async (id: number) => {
-      return apiRequest("DELETE", `/api/weights/${id}`);
-    },
+    mutationFn: deleteWeight,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [`/api/weights/history/${encodeURIComponent(exerciseName)}`] });
-      queryClient.invalidateQueries({ queryKey: ["/api/exercise-stats"] });
+      queryClient.invalidateQueries({ queryKey: ['weights', 'history', exerciseName] });
+      queryClient.invalidateQueries({ queryKey: ['exercise-stats'] });
     },
   });
 

@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { pgTable, serial, integer, text, numeric, unique } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 
 export const setSchema = z.object({
   reps: z.string(),
@@ -29,28 +27,9 @@ export interface CompletionStatus {
   };
 }
 
-export const exerciseWeights = pgTable("exercise_weights", {
-  id: serial("id").primaryKey(),
-  week: integer("week").notNull(),
-  day: integer("day").notNull(),
-  exerciseName: text("exercise_name").notNull(),
-  weight: numeric("weight", { precision: 5, scale: 2 }).notNull(),
-}, (table) => ({
-  uniqueExercisePerDay: unique("unique_exercise_per_day").on(table.week, table.day, table.exerciseName),
-}));
-
-export const insertExerciseWeightSchema = createInsertSchema(exerciseWeights).omit({ id: true });
-export type InsertExerciseWeight = z.infer<typeof insertExerciseWeightSchema>;
-export type ExerciseWeight = typeof exerciseWeights.$inferSelect;
-
-export const completions = pgTable("completions", {
-  id: serial("id").primaryKey(),
-  week: integer("week").notNull(),
-  day: integer("day").notNull(),
-}, (table) => ({
-  uniqueCompletion: unique("unique_completion").on(table.week, table.day),
-}));
-
-export const insertCompletionSchema = createInsertSchema(completions).omit({ id: true });
-export type InsertCompletion = z.infer<typeof insertCompletionSchema>;
-export type Completion = typeof completions.$inferSelect;
+// Database types (matches Supabase schema)
+export interface Completion {
+  id: number;
+  week: number;
+  day: number;
+}

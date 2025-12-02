@@ -12,7 +12,7 @@ export default function Home() {
   const availableWeeks = getAvailableWeeks();
   
   useQuery<Completion[]>({
-    queryKey: ["/api/completions"],
+    queryKey: ['completions'],
     queryFn: fetchCompletions,
     staleTime: 30000,
     placeholderData: (previousData) => previousData,
